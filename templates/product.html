@@ -24,37 +24,41 @@
 
             <div class="mb-3">
               <a href="">
-                <span class="badge purple mr-1">Category 2</span>
-              </a>
-              <a href="">
-                <span class="badge blue mr-1">New</span>
-              </a>
-              <a href="">
-                <span class="badge red mr-1">Bestseller</span>
+                <span class="badge purple mr-1">{{ object.get_category_display }}</span>
               </a>
             </div>
 
             <p class="lead">
+              {% if object.discount_price %}
               <span class="mr-1">
-                <del>$200</del>
+                <del>${{ object.price }}</del>
               </span>
-              <span>$100</span>
+              <span>${{ object.discount_price }}</span>
+              {% else %}
+              <span>${{ object.price }}</span>
+              {% endif %}
             </p>
 
             <p class="lead font-weight-bold">Description</p>
 
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dolor suscipit libero eos atque quia ipsa
-              sint voluptatibus!
-              Beatae sit assumenda asperiores iure at maxime atque repellendus maiores quia sapiente.</p>
+            <p>{{ object.description }}</p>
 
-            <form class="d-flex justify-content-left">
+            {% comment %} <form class="d-flex justify-content-left">
               <!-- Default input -->
               <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
-              <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
+              <button class="btn btn-primary btn-md my-0 p" type="submit">
+                Add to cart
                 <i class="fas fa-shopping-cart ml-1"></i>
               </button>
 
-            </form>
+            </form> {% endcomment %}
+            <a href="{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
+              Add to cart
+              <i class="fas fa-shopping-cart ml-1"></i>
+            </a>
+            <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-md my-0 p">
+              Remove from cart
+            </a>
 
           </div>
           <!--Content-->
