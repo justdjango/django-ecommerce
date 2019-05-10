@@ -13,6 +13,7 @@
         <span class="text-muted">${{ order_item.get_final_price }}</span>
     </li>
     {% endfor %}
+    {% if order.coupon %}
     <li class="list-group-item d-flex justify-content-between bg-light">
         <div class="text-success">
         <h6 class="my-0">Promo code</h6>
@@ -20,6 +21,7 @@
         </div>
         <span class="text-success">-${{ order.coupon.amount }}</span>
     </li>
+    {% endif %}
     <li class="list-group-item d-flex justify-content-between">
         <span>Total (USD)</span>
         <strong>${{ order.get_total }}</strong>
