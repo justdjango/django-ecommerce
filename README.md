@@ -6,4 +6,7 @@ This is an ecommerce website built with Django. The website displays products. U
 
 [Watch the tutorial series here](https://youtu.be/z4USlooVXG0)
 
-[Become a better Django developer](https://www.justdjango.com)
+[Become a better Django developer](https://www.justdjango.com
+
+
+Added Paypal as a payment option.)

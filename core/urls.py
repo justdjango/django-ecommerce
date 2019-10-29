@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from .views import (
     ItemDetailView,
     CheckoutView,
@@ -9,7 +9,10 @@ from .views import (
     remove_single_item_from_cart,
     PaymentView,
     AddCouponView,
-    RequestRefundView
+    RequestRefundView,
+    PaymentProcess,
+    payment_done,
+    payment_canceled
 )
 
 app_name = 'core'
@@ -25,5 +28,10 @@ urlpatterns = [
     path('remove-item-from-cart/<slug>/', remove_single_item_from_cart,
          name='remove-single-item-from-cart'),
     path('payment/<payment_option>/', PaymentView.as_view(), name='payment'),
-    path('request-refund/', RequestRefundView.as_view(), name='request-refund')
+    path('request-refund/', RequestRefundView.as_view(), name='request-refund'),
+    re_path(r'^paypal/',include('paypal.standard.ipn.urls')),
+    re_path(r'^process/$', PaymentProcess.as_view(), name='process'),
+    re_path(r'^done/$', payment_done, name='done'),
+    re_path(r'^canceled/$', payment_canceled, name='canceled'),
+
 ]
