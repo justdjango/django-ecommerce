@@ -514,3 +514,36 @@ class RequestRefundView(View):
             except ObjectDoesNotExist:
                 messages.info(self.request, "This order does not exist.")
                 return redirect("core:request-refund")
+
+
+
+@csrf_exempt
+def payment_done(request):
+    return render(request, 'done.html')
+
+
+@csrf_exempt
+def payment_canceled(request):
+    return render(request, 'canceled.html')
+
+class PaymentProcess(View):
+    def get(self, request):
+        print("in process")
+        # order_id = request.GET['order_id']
+        # order = get_object_or_404(Order, id=order_id)
+        order = Order.objects.get(user=self.request.user, ordered=False)
+        host = request.get_host()
+
+        paypal_dict = {
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount': order.get_total(),
+        'item_name': 'Order {}'.format(order.id),
+        'invoice': str(order.id),
+        'currency_code': 'USD',
+        # 'notify_url': 'http://{}{}'.format(host, reverse('paypal-ipn')),
+        'return_url': 'http://{}{}'.format(host, reverse('core:done')),
+        'cancel_return': 'http://{}{}'.format(host, reverse('core:canceled')),
+        }
+        form = PayPalPaymentsForm(initial=paypal_dict)
+        return render(request, 'process.html', {'order':order,
+            'form':form})
