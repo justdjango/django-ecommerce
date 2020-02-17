@@ -10,7 +10,7 @@ django-debug-toolbar==1.10.1
 idna==2.8
 oauthlib==3.0.1
 pep8==1.7.1
-Pillow==6.0.0
+Pillow==6.2.0
 pycodestyle==2.5.0
 python-decouple==3.1
 python3-openid==3.1.0
