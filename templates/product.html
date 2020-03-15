@@ -47,9 +47,12 @@
 {#              </button>#}
 {##}
 {#            </form>#}
-            <a href="{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
-                Book the class
-                <i class="fas fa-shopping-cart ml-1"></i>
+                <a href="{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
+                    Book the class
+                    <i class="fas fa-shopping-cart ml-1"></i>
+                </a>
+              <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-md my-0 p">
+                Cancel booking
               </a>
           </div>
           <!--Content-->
