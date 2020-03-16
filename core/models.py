@@ -23,14 +23,11 @@ LABEL_CHOICES = (
 
 )
 
-
-# list of item that you can booked
-# TODO: add description of item
 class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.CharField(max_length=4)
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
-    label = models.CharField(choices=LABEL_CHOICES, max_length=1)
+    label = models.CharField(max_length=15)
     slug = models.SlugField()
     description = models.TextField()
 

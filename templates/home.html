@@ -127,7 +127,7 @@
     <div class="container">
 
       <!--Navbar-->
-      <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
+      <nav class="navbar navbar-expand-lg navbar-dark btn-orange lighten-3 mt-3 mb-5">
 
         <!-- Navbar brand -->
         <span class="navbar-brand">Categories:</span>
@@ -186,7 +186,7 @@
 
               <!--Card image-->
               <div class="view overlay">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg" class="card-img-top"
+                <img src="https://s3.amazonaws.com/btoimage/prism-thumbnails/articles/20141125-fitfactory2048-08.jpg-resize_then_crop-_frame_bg_color_FFF-h_1365-gravity_center-q_70-preserve_ratio_true-w_2048_.webp" class="card-img-top"
                   alt="">
                 <a href="{{ item.get_absolute_url }}">
                   <div class="mask rgba-white-slight"></div>
@@ -198,19 +198,18 @@
               <div class="card-body text-center">
                 <!--Category & Title-->
                 <a href="" class="grey-text">
-                  <h5>{{ item.get_category_display }}</h5>
+                  <h5>{{ item.price }}</h5>
                 </a>
                 <h5>
                   <strong>
                     <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}
-                      <span class="badge badge-pill {{ item.get_label_display }}-color">NEW</span>
                     </a>
                   </strong>
                 </h5>
 
-                <h4 class="font-weight-bold blue-text">
-                  <strong>{{ item.price }}</strong>
-                </h4>
+                <h6 class="font-weight-bold orange-text">
+                  <strong>{{ item.label }}</strong>
+                </h6>
 
               </div>
               <!--Card content-->
@@ -228,44 +227,39 @@
       <!--Section: Products v.3-->
 
       <!--Pagination-->
+
+        {% if is_paginated %}
       <nav class="d-flex justify-content-center wow fadeIn">
         <ul class="pagination pg-blue">
 
           <!--Arrow left-->
-          <li class="page-item disabled">
-            <a class="page-link" href="#" aria-label="Previous">
+            {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
               <span class="sr-only">Previous</span>
             </a>
           </li>
+            {% endif %}
 
           <li class="page-item active">
-            <a class="page-link" href="#">1
+            <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}
               <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="#">2</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">3</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">4</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">5</a>
-          </li>
 
+            {% if page_obj.has_next %}
           <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
               <span class="sr-only">Next</span>
             </a>
           </li>
+            {% endif %}
         </ul>
       </nav>
       <!--Pagination-->
+    {% endif %}
 
     </div>
   </main>
