@@ -7,7 +7,7 @@ Steps to use this project:
 1. Pull this repository
 2. Create a virtualenv and install dependencies with `pip install -r requirements.txt`
 3. Configure your .env variables
-4. Run the website using 'python manage.py runserver'
+4. Run the website using `python manage.py runserver`
 
 
 This project includes:
