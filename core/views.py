@@ -60,7 +60,7 @@ class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)
-            context = { 'object': order}
+            context = {'object': order}
             return render(self.request, "order_summary.html", context)
         except ObjectDoesNotExist:
             messages.error(self.request, "You don't have any class booked")
