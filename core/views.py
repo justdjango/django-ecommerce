@@ -35,13 +35,16 @@ class FeedbackView(View):
         form = FeedbackForm(self.request.POST or None)
         if form.is_valid():
             print("The form is valid")
+            class_per_week = form.cleaned_data['class_per_week']
             timetable = form.cleaned_data['timetable']
+            instructor = form.cleaned_data['instructor']
             capacity = form.cleaned_data['capacity']
             time = form.cleaned_data['duration']
+            class_size = form.cleaned_data['class_size']
             facilities = form.cleaned_data['facilities']
             price = form.cleaned_data['price']
-            dictionary = {'timetable': timetable, 'capacity': capacity, 'time': time,
-                          'facilities': facilities, 'price': price}
+            dictionary = {'class_per_week': class_per_week, 'timetable': timetable, 'instructor': instructor, 'capacity': capacity, 'time': time,
+                          'class_size': class_size, 'facilities': facilities, 'price': price}
             # This method is called after the user submit their answers.
             # This method should be the one that does the churn prediction for the current user
             # TODO: fill the method with the churn model. The method is in churn.py
