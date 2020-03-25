@@ -23,6 +23,7 @@ LABEL_CHOICES = (
 
 )
 
+
 class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.CharField(max_length=4)
@@ -30,7 +31,6 @@ class Item(models.Model):
     label = models.CharField(max_length=15)
     slug = models.SlugField()
     description = models.TextField()
-
 
     def __str__(self):
         return self.title

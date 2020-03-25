@@ -31,10 +31,6 @@
                 <strong>Tired of repeating the same exercises over and over again? Jymbud
                     can help! New recommendation every time you book a class.</strong>
               </p>
-
-              <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/" class="btn btn-outline-white btn-lg">
-                Discover now new classes
-              </a>
             </div>
             <!-- Content -->
 
@@ -55,17 +51,16 @@
             <!-- Content -->
             <div class="text-center white-text mx-5 wow fadeIn">
               <h1 class="mb-4">
-                <strong>Enjoy 30+ classes with JymBüd </strong>
+                <strong>Your opinion matters.</strong>
               </h1>
 
               <p class="mb-4 d-none d-md-block">
-                <strong>Tired of repeating the same exercises over and over again? Jymbud
-                    can help! New recommendation every time you book a class.</strong>
+                <strong>We care about you and we are ready to change for good.
+                    Take this quick survey and let us know what you think</strong>
               </p>
 
-              <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/" class="btn btn-outline-white btn-lg">
-                Discover now new classes
-              </a>
+                <button type="button" class="btn btn-outline-white btn-lg" data-toggle="modal" data-target="#modalSocial">Take
+                survey</button>
             </div>
             <!-- Content -->
 
@@ -86,17 +81,16 @@
             <!-- Content -->
             <div class="text-center white-text mx-5 wow fadeIn">
               <h1 class="mb-4">
-                <strong>Enjoy 30+ classes with JymBüd </strong>
+                <strong>Your opinion matters.</strong>
               </h1>
 
               <p class="mb-4 d-none d-md-block">
-                <strong>Tired of repeating the same exercises over and over again? Jymbud
-                    can help! New recommendation every time you book a class.</strong>
+                <strong>We care about you and we are ready to change for good.
+                    Take this quick survey and let us know what you think</strong>
               </p>
 
-              <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/" class="btn btn-outline-white btn-lg">
-                Discover now new classes
-              </a>
+                <button type="button" class="btn btn-outline-white btn-lg" data-toggle="modal" data-target="#modalSocial">Take
+                survey</button>
             </div>
             <!-- Content -->
 
@@ -263,6 +257,102 @@
 
     </div>
   </main>
+
+    <div class="modal fade" id="modalSocial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+
+    <!--Content-->
+    <div class="modal-content">
+
+      <!--Header-->
+      <div class="modal-header btn-orange darken-3 white-text">
+        <h4 class="title"><i class="fas fa-users"></i> Feedback</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body mb-0 text-center">
+
+          <div class="survey-head text-center">
+              <i class="fas fa-poll-h fa-3x orange-text mb-2"></i>
+              <p class="font-weight-normal">Your opinion matters</p>
+              <p>Give us your feedback.</p>
+            </div>
+            <hr>
+
+            <div class="form-check mb-4 clearfix custom-control-inline">
+              <label class="form-check-label float-right">Are you happy why the class timetable? </label>
+            </div>
+
+            <div class="form-check-inline">
+                <label class="form-check-label"><input type="radio" name="option1" value="Option 1">Yes
+              </label>
+                <label class="form-check-label"><input type="radio" name="option1" value="Option 2">No
+              </label>
+            </div>
+
+            <div class="form-check mb-4 clearfix custom-control-inline">
+              <label class="form-check-label float-right">Are you happy why the classes capacity? </label>
+            </div>
+
+            <div class="form-check-inline">
+                <label class="form-check-label"><input type="radio" name="option2" value="Option 1">Yes
+              </label>
+                <label class="form-check-label"><input type="radio" name="option2" value="Option 2">No
+              </label>
+            </div>
+
+
+            <div class="form-check mb-4 clearfix custom-control-inline">
+              <label class="form-check-label float-left">Are you happy with classes' duration?</label>
+            </div>
+
+            <div class="form-check-inline">
+                <label class="form-check-label"><input type="radio" name="option3" value="Option 1">Yes
+              </label>
+                <label class="form-check-label"><input type="radio" name="option3" value="Option 2">No
+              </label>
+            </div>
+
+            <div class="form-check mb-4 clearfix custom-control-inline">
+              <label class="form-check-label float-left">Are you happy with the facilities?</label>
+            </div>
+
+            <div class="form-check-inline">
+                <label class="form-check-label"><input type="radio" name="option4" value="Option 1">Yes
+              </label>
+                <label class="form-check-label"><input type="radio" name="option4" value="Option 2">No
+              </label>
+            </div>
+
+            <div class="form-check mb-4 clearfix custom-control-inline">
+              <label class="form-check-label float-left">Are you happy with the price?</label>
+            </div>
+
+            <div class="form-check-inline">
+                <label class="form-check-label"><input type="radio" name="option5" value="Option 1">Yes
+              </label>
+                <label class="form-check-label"><input type="radio" name="option5" value="Option 2">No
+              </label>
+            </div>
+
+            <!-- Radio -->
+
+            <hr>
+            <div class="survey-footer clearfix">
+              <a type="button" class="btn btn-deep-orange waves-effect waves-light float-left" data-target="#thanks">Send
+                <i class="fa fa-paper-plane ml-1"></i>
+              </a>
+              <a type="button" class="btn btn-outline-deep-orange waves-effect float-right" data-dismiss="modal">Cancel</a>
+            </div>
+
+      </div>
+
+    </div>
+    <!--/.Content-->
+
 
 {% endblock content %}
 

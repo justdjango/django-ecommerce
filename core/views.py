@@ -5,7 +5,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, View
 from .models import Item, Order, OrderItem
+from .forms import FeedbackForm
 from django.utils import timezone
+
+from churn import churn
 
 
 def products(request):
@@ -19,10 +22,39 @@ def checkout(request):
     return render(request, "checkout.html")
 
 
+class FeedbackView(View):
+    def get(self, *args, **kwargs):
+        # form
+        form = FeedbackForm()
+        context = {
+            'form': form
+        }
+        return render(self.request, "feedback.html", context)
+
+    def post(self, *args, **kwargs):
+        form = FeedbackForm(self.request.POST or None)
+        if form.is_valid():
+            print("The form is valid")
+            timetable = form.cleaned_data['timetable']
+            capacity = form.cleaned_data['capacity']
+            time = form.cleaned_data['duration']
+            facilities = form.cleaned_data['facilities']
+            price = form.cleaned_data['price']
+            dictionary = {'timetable': timetable, 'capacity': capacity, 'time': time,
+                          'facilities': facilities, 'price': price}
+            # This method is called after the user submit their answers.
+            # This method should be the one that does the churn prediction for the current user
+            # TODO: fill the method with the churn model. The method is in churn.py
+            churn(dictionary)
+
+        return redirect('core:feedback')
+
+
 class HomeView(ListView):
     model = Item
     paginate_by = 5
     template_name = "home.html"
+
 
 class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
@@ -33,8 +65,6 @@ class OrderSummaryView(LoginRequiredMixin, View):
         except ObjectDoesNotExist:
             messages.error(self.request, "You don't have any class booked")
             return redirect("/")
-
-
 
 
 class ItemDetailView(DetailView):
@@ -55,8 +85,7 @@ def add_to_cart(request, slug):
         order = order_qs[0]
         # check if order is in order
         if order.items.filter(item__slug=item.slug).exists():
-            #TODO: change this, user can book just one class
-            messages.info(request, "You have already booked this class.")
+            messages.info(request, "You have already booked this class")
         else:
             messages.info(request, "You booked this class.")
             order.items.add(order_item)

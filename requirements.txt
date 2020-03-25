@@ -1,3 +1,4 @@
+pandas
 autopep8==1.4.4
 certifi==2019.3.9
 chardet==3.0.4
