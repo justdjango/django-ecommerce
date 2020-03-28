@@ -1,7 +1,7 @@
 from django import forms
 import pandas as pd
 
-ANSWERS = (('', '-'),('yes', 'Yes'), ('no', 'No'))
+ANSWERS = (('', '-'), ('yes', 'Yes'), ('no', 'No'))
 
 INSTRUCTOR = (('', '-'), ('1', '1'), ('2', '2'), ('3', '3'))
 
