@@ -1,124 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div id="carousel-example-1z" class="carousel slide carousel-fade pt-4" data-ride="carousel">
-
-    <!--Indicators-->
-    <ol class="carousel-indicators">
-      <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
-      <li data-target="#carousel-example-1z" data-slide-to="1"></li>
-      <li data-target="#carousel-example-1z" data-slide-to="2"></li>
-    </ol>
-    <!--/.Indicators-->
-
-    <!--Slides-->
-    <div class="carousel-inner" role="listbox">
-
-      <!--First slide-->
-      <div class="carousel-item">
-        <div class="view" style="background-image: url('https://www.vitstix.com/wp-content/uploads/2019/01/gym-classes-1200x400.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-          <!-- Mask & flexbox options-->
-          <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
-
-            <!-- Content -->
-            <div class="text-center white-text mx-5 wow fadeIn">
-              <h1 class="mb-4">
-                <strong>Enjoy 30+ classes with JymBüd </strong>
-              </h1>
-
-              <p class="mb-4 d-none d-md-block">
-                <strong>Tired of repeating the same exercises over and over again? Jymbud
-                    can help! New recommendation every time you book a class.</strong>
-              </p>
-            </div>
-            <!-- Content -->
-
-          </div>
-          <!-- Mask & flexbox options-->
-
-        </div>
-      </div>
-      <!--/First slide-->
-
-        <!--Second slide-->
-      <div class="carousel-item">
-        <div class="view" style="background-image: url('https://www.westminster.ac.uk/sites/default/public-files/styles/panel_image_1_4/public/general-images/Regent-street-gym-40.png?itok=O-KzR6uU'); background-repeat: no-repeat; background-size: cover;">
-
-          <!-- Mask & flexbox options-->
-          <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
-
-            <!-- Content -->
-            <div class="text-center white-text mx-5 wow fadeIn">
-              <h1 class="mb-4">
-                <strong>Your opinion matters.</strong>
-              </h1>
-
-              <p class="mb-4 d-none d-md-block">
-                <strong>We care about you and we are ready to change for good.
-                    Take this quick survey and let us know what you think</strong>
-              </p>
-
-                <button type="button" class="btn btn-outline-white btn-lg" data-toggle="modal">
-                    <a href="feedback/" style="color: #fd7e14"> Take survey </a>
-                </button>
-            </div>
-            <!-- Content -->
-
-          </div>
-          <!-- Mask & flexbox options-->
-
-        </div>
-      </div>
-      <!--/Second slide-->
-
-        <!--Third slide-->
-      <div class="carousel-item active">
-        <div class="view" style="background-image: url('https://www.polar.com/blog/wp-content/uploads/2017/01/What-is-group-fitness_hero.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-          <!-- Mask & flexbox options-->
-          <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
-
-            <!-- Content -->
-            <div class="text-center white-text mx-5 wow fadeIn">
-              <h1 class="mb-4">
-                <strong>Your opinion matters.</strong>
-              </h1>
-
-              <p class="mb-4 d-none d-md-block">
-                <strong>We care about you and we are ready to change for good.
-                    Take this quick survey and let us know what you think</strong>
-              </p>
-
-                <button type="button" class="btn btn-outline-white btn-lg" data-toggle="modal">
-                    <a href="feedback/" style="color: #fd7e14"> Take survey </a>
-                </button>
-            </div>
-            <!-- Content -->
-
-          </div>
-          <!-- Mask & flexbox options-->
-
-        </div>
-      </div>
-      <!--/Third slide-->
-
-    </div>
-    <!--/.Slides-->
-
-    <!--Controls-->
-    <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-    <!--/.Controls-->
-
-  </div>
-
   <main>
     <div class="container">
 
@@ -164,72 +46,68 @@
       <!--Section: Products v.3-->
       <section class="text-center mb-4">
 
-        <!--Grid row-->
         <div class="row wow fadeIn">
 
-            {% for item in object_list %}
+          {% for item in object_list %}
           <div class="col-lg-3 col-md-6 mb-4">
 
-            <!--Card-->
             <div class="card">
 
-              <!--Card image-->
               <div class="view overlay">
-                <img src="https://s3.amazonaws.com/btoimage/prism-thumbnails/articles/20141125-fitfactory2048-08.jpg-resize_then_crop-_frame_bg_color_FFF-h_1365-gravity_center-q_70-preserve_ratio_true-w_2048_.webp" class="card-img-top"
-                  alt="">
+                {% comment %} <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg" class="card-img-top" {% endcomment %}
+                <img src="{{ item.image.url }}" class="card-img-top">
                 <a href="{{ item.get_absolute_url }}">
                   <div class="mask rgba-white-slight"></div>
                 </a>
               </div>
-              <!--Card image-->
 
-              <!--Card content-->
               <div class="card-body text-center">
-                <!--Category & Title-->
                 <a href="" class="grey-text">
-                  <h5>{{ item.price }}</h5>
+                  <h5>{{ item.get_category_display }}</h5>
                 </a>
                 <h5>
                   <strong>
                     <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}
+                      <span class="badge badge-pill {{ item.get_label_display }}-color">NEW</span>
                     </a>
                   </strong>
                 </h5>
 
-                <h6 class="font-weight-bold orange-text">
-                  <strong>{{ item.label }}</strong>
-                </h6>
+                <h4 class="font-weight-bold blue-text">
+                  <strong>$
+                  {% if item.discount_price %}
+                  {{ item.discount_price }}
+                  {% else %}
+                  {{ item.price }}
+                  {% endif %}
+                  </strong>
+                </h4>
 
               </div>
-              <!--Card content-->
 
             </div>
-            <!--Card-->
 
           </div>
-            {% endfor %}
-
+          {% endfor %}
         </div>
-        <!--Grid row-->
 
       </section>
       <!--Section: Products v.3-->
 
       <!--Pagination-->
 
-        {% if is_paginated %}
+      {% if is_paginated %}
       <nav class="d-flex justify-content-center wow fadeIn">
         <ul class="pagination pg-blue">
 
-          <!--Arrow left-->
-            {% if page_obj.has_previous %}
+          {% if page_obj.has_previous %}
           <li class="page-item">
             <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
               <span class="sr-only">Previous</span>
             </a>
           </li>
-            {% endif %}
+          {% endif %}
 
           <li class="page-item active">
             <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}
@@ -237,18 +115,17 @@
             </a>
           </li>
 
-            {% if page_obj.has_next %}
+          {% if page_obj.has_next %}
           <li class="page-item">
             <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
               <span class="sr-only">Next</span>
             </a>
           </li>
-            {% endif %}
+          {% endif %}
         </ul>
       </nav>
-      <!--Pagination-->
-    {% endif %}
+      {% endif %}
 
     </div>
   </main>

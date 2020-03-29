@@ -7,7 +7,7 @@ INSTALLED_APPS += [
     'debug_toolbar'
 ]
 
-MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware',]
+MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
 
 # DEBUG TOOLBAR SETTINGS
 
@@ -26,8 +26,10 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.redirects.RedirectsPanel',
 ]
 
+
 def show_toolbar(request):
     return True
+
 
 DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS': False,

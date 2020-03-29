@@ -2,7 +2,7 @@
 
 {% block content %}
 
-  <main class="mt-5 pt-5">
+  <main class="mt-5 pt-4">
     <div class="container dark-grey-text mt-5">
 
       <!--Grid row-->
@@ -11,7 +11,7 @@
         <!--Grid column-->
         <div class="col-md-6 mb-4">
 
-          <img src="https://s3.amazonaws.com/btoimage/prism-thumbnails/articles/20141125-fitfactory2048-08.jpg-resize_then_crop-_frame_bg_color_FFF-h_1365-gravity_center-q_70-preserve_ratio_true-w_2048_.webp" class="img-fluid" alt="">
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/14.jpg" class="img-fluid" alt="">
 
         </div>
         <!--Grid column-->
@@ -21,27 +21,45 @@
 
           <!--Content-->
           <div class="p-4">
-            <p class="lead font-weight-bold">{{ object.title }}</p>
+
             <div class="mb-3">
               <a href="">
-                  <span class="badge orange mr-1">{{ object.get_category_display}}</span>
+                <span class="badge purple mr-1">{{ object.get_category_display }}</span>
               </a>
             </div>
 
             <p class="lead">
+              {% if object.discount_price %}
               <span class="mr-1">
+                <del>${{ object.price }}</del>
               </span>
-
-              <span>{{ object.label }}</span>
+              <span>${{ object.discount_price }}</span>
+              {% else %}
+              <span>${{ object.price }}</span>
+              {% endif %}
             </p>
 
+            <p class="lead font-weight-bold">Description</p>
+
             <p>{{ object.description }}</p>
-                <a href="{{ object.get_add_to_cart_url }}" class="btn btn-orange btn-md my-0 p">
-                    Book the class
-                </a>
-              <a href="{{ object.get_remove_from_cart_url }}" class="btn orange btn-md my-0 p">
-                Cancel booking
-              </a>
+
+            {% comment %} <form class="d-flex justify-content-left">
+              <!-- Default input -->
+              <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
+              <button class="btn btn-primary btn-md my-0 p" type="submit">
+                Add to cart
+                <i class="fas fa-shopping-cart ml-1"></i>
+              </button>
+
+            </form> {% endcomment %}
+            <a href="{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
+              Add to cart
+              <i class="fas fa-shopping-cart ml-1"></i>
+            </a>
+            <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-md my-0 p">
+              Remove from cart
+            </a>
+
           </div>
           <!--Content-->
 
@@ -59,7 +77,12 @@
         <!--Grid column-->
         <div class="col-md-6 text-center">
 
-          <h4 class="my-4 h4">You may also like</h4>
+          <h4 class="my-4 h4">Additional information</h4>
+
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit
+            voluptates,
+            quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.</p>
+
         </div>
         <!--Grid column-->
 
@@ -72,7 +95,7 @@
         <!--Grid column-->
         <div class="col-lg-4 col-md-12 mb-4">
 
-          <img src="https://www.telegraph.co.uk/content/dam/health-fitness/spark/centrum/mixed-step-gym-glass.jpg?imwidth=480" class="img-fluid" alt="">
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg" class="img-fluid" alt="">
 
         </div>
         <!--Grid column-->
@@ -80,7 +103,7 @@
         <!--Grid column-->
         <div class="col-lg-4 col-md-6 mb-4">
 
-          <img src="https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/k-126-teddy-4158.jpg?w=800&dpr=1&fit=default&crop=default&auto=format&fm=pjpg&q=75&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=bfe4b11c60f85a858da50665adda60dd" class="img-fluid" alt="">
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/12.jpg" class="img-fluid" alt="">
 
         </div>
         <!--Grid column-->
@@ -88,7 +111,7 @@
         <!--Grid column-->
         <div class="col-lg-4 col-md-6 mb-4">
 
-          <img src="https://www.virginactive.com.sg/images/library/Facilities/Cycle.jpg" class="img-fluid" alt="">
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="img-fluid" alt="">
 
         </div>
         <!--Grid column-->

@@ -1,20 +1,9 @@
-# eCommerce website for a Gym using django
+# Django Ecommerce
 
-This project involves the creation of a website that provides the user with a wide range of classes to which they can attend. 
+This is an ecommerce website built with Django. The website displays products. Users can add and remove products to/from their cart while also specifying the quantity of each item.
 
-Steps to use this project:
+[![alt text](https://github.com/justdjango/django-ecommerce/blob/master/thumbnail.png "Logo")](https://youtu.be/z4USlooVXG0)
 
-1. Pull this repository
-2. Create a virtualenv and install dependencies with `pip install -r requirements.txt`
-3. Configure your .env variables
-4. Run the website using `python manage.py runserver`
+[Watch the tutorial series here](https://youtu.be/z4USlooVXG0)
 
-
-This project includes:
-
-1. The Django Debug Toolbar already setup
-2. Multiple settings modules setup for easily deploying
-3. Python-decouple for securely referencing keys, passwords and other settings.
-4. A custom Django command for renaming the project
-
-The original project is taken from: https://github.com/justdjango/django-ecommerce , whom I thank for his tutorials, videos and all the materials that made this project possible.
+[Become a better Django developer](https://www.justdjango.com)
