@@ -11,10 +11,10 @@ class Migration(migrations.Migration):
         ('core', '0008_auto_20200315_1402'),
     ]
 
-    operations = [
-        migrations.AlterField(
-            model_name='orderitem',
-            name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
-        ),
-    ]
+    # operations = [
+    #     migrations.AlterField(
+    #         model_name='orderitem',
+    #         name='user',
+    #         field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+    #     ),
+    # ]
