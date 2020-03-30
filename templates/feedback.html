@@ -4,106 +4,95 @@ orange lighten-3
 
 {% block content %}
 
-  <main class="mt-5 pt-5 ">
-    <div class="container wow fadeIn">
+<main class="mt-5 pt-5 ">
+  <div class="container wow fadeIn">
 
-      <!-- Heading -->
-      <h2 class="card-header wow fadeIn orange-text text-center py-4">Feedback form</h2>
-
-
-      <!--Card-->
-      <div class="card">
-
-        <!--Card content-->
-        <form method="POST" class="card-body align-self-center">
-            {% csrf_token %}
-
-            <!--Grid column-->
-            <div class="col-lg-12 col-md-6 mb-4">
-
-              <label for="zip">How many classes do you attend in a week?</label>
-              {{ form.class_per_week }}
-
-            </div>
-            <!--Grid column-->
+    <!-- Heading -->
+    <h2 class="card-header wow fadeIn orange-text text-center py-4">Feedback form</h2>
 
 
-            <!--Grid column-->
-            <div class="col-lg-12 col-md-6 mb-4">
+    <!--Card-->
+    <div class="card">
 
-              <label for="country">Are you happy with the class timetable?</label>
-                {{ form.timetable }}
-              </div>
+      <!--Card content-->
+      <form method="POST" class="card-body align-self-center">
+        {% csrf_token %}
 
-            <!--Grid column-->
+        <!--Grid column-->
+        <div class="col-lg-12 col-md-6 mb-4">
 
-            <!--Grid column-->
-            <div class="col-lg-12 col-md-6 mb-4">
+          <label for="zip">How many classes do you attend in a week?</label>
+          {{ form.Classes_per_week }}
 
-              <label for="zip">Are you happy with the class instructors?</label>
-              {{ form.instructor }}
+        </div>
+        <!--Grid column-->
 
-            </div>
-            <!--Grid column-->
+        <!--Grid column-->
+        <div class="col-lg-12 col-md-6 mb-4">
 
-            <!--Grid column-->
-            <div class="col-lg-12 col-md-6 mb-4">
+          <label for="zip">Are you happy with the class instructors?</label>
+          {{ form.Happy_with_instructors }}
 
-              <label for="state">Are you happy why the classes capacity?</label>
-              {{ form.capacity }}
-            </div>
-            <!--Grid column-->
+        </div>
+        <!--Grid column-->
 
-            <!--Grid column-->
-            <div class="col-lg-12 col-md-6 mb-4">
+        <!--Grid column-->
+        <div class="col-lg-12 col-md-6 mb-4">
 
-              <label for="zip">Are you happy with how long the classes last?</label>
-              {{ form.duration }}
+          <label for="zip">Are you happy with how long the classes last?</label>
+          {{ form.Happy_with_class_duration}}
 
-            </div>
-            <!--Grid column-->
+        </div>
+        <!--Grid column-->
 
-            <!--Grid column-->
-            <div class="col-lg-12 col-md-6 mb-4">
+        <!--Grid column-->
+        <div class="col-lg-12 col-md-6 mb-4">
 
-              <label for="zip">Are you happy with the class size?</label>
-              {{ form.class_size }}
+          <label for="country">Are you happy with the class timetable?</label>
+          {{ form.Happy_with_class_timings }}
+        </div>
 
-            </div>
-            <!--Grid column-->
+        <!--Grid column-->
 
-            <!--Grid column-->
-            <div class="col-lg-12 col-md-6 mb-4">
+        <!--Grid column-->
+        <div class="col-lg-12 col-md-6 mb-4">
 
-              <label for="zip">Are you happy with the classes facilities?</label>
-              {{ form.facilities }}
+          <label for="zip">Are you happy with the class size?</label>
+          {{ form.Happy_with_class_size }}
 
-            </div>
-            <!--Grid column-->
+        </div>
+        <!--Grid column-->
 
-            <!--Grid column-->
-            <div class="col-lg-12 col-md-6 mb-4">
+        <!--Grid column-->
+        <div class="col-lg-12 col-md-6 mb-4">
 
-              <label for="zip">Are you happy with the price?</label>
-              {{ form.price }}
+          <label for="zip">Are you happy with the classes facilities?</label>
+          {{ form.Happy_with_facilities }}
 
-            </div>
-            <!--Grid column-->
+        </div>
+        <!--Grid column-->
 
-          <hr>
+        <!--Grid column-->
+        <div class="col-lg-12 col-md-6 mb-4">
 
-          <button class="btn btn-orange btn-lg btn-block" type="submit">Leave Feedback</button>
+          <label for="zip">Are you happy with the price?</label>
+          {{ form.Happy_with_price }}
 
-        </form>
+        </div>
+        <!--Grid column-->
 
-      </div>
-      <!--/.Card-->
+        <hr>
 
-      </div>
-      <!--Grid row-->
+        <button class="btn btn-orange btn-lg btn-block" type="submit">Leave Feedback</button>
 
-  </main>
+      </form>
+
+    </div>
+    <!--/.Card-->
+
+  </div>
+  <!--Grid row-->
+
+</main>
 
 {% endblock content %}
-
-
