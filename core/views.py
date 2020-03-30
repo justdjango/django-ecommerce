@@ -33,32 +33,29 @@ class FeedbackView(View):
 
     def post(self, *args, **kwargs):
         form = FeedbackForm(self.request.POST or None)
-        print(form.errors)
         if form.is_valid():
             print("The form is valid")
-            class_per_week = form.cleaned_data['Classes_per_week']
-            instructor = form.cleaned_data['Happy_with_instructors']
-            time = form.cleaned_data['Happy_with_class_duration']
-            timetable = form.cleaned_data['Happy_with_class_timings']
-            class_size = form.cleaned_data['Happy_with_class_size']
-            facilities = form.cleaned_data['Happy_with_facilities']
-            price = form.cleaned_data['Happy_with_price']
-            dictionary = {'Classes_per_week': class_per_week, 'Happy_with_instructors': instructor,
-                          'Happy_with_class_duration': time, 'Happy_with_class_timings': timetable,
-                          'Happy_with_class_size': class_size, 'Happy_with_facilities': facilities,
-                          'Happy_with_price': price}
+            class_per_week = form.cleaned_data['class_per_week']
+            timetable = form.cleaned_data['timetable']
+            instructor = form.cleaned_data['instructor']
+            capacity = form.cleaned_data['capacity']
+            time = form.cleaned_data['duration']
+            class_size = form.cleaned_data['class_size']
+            facilities = form.cleaned_data['facilities']
+            price = form.cleaned_data['price']
+            dictionary = {'class_per_week': class_per_week, 'timetable': timetable, 'instructor': instructor, 'capacity': capacity, 'time': time,
+                          'class_size': class_size, 'facilities': facilities, 'price': price}
             # This method is called after the user submit their answers.
             # This method should be the one that does the churn prediction for the current user
             # TODO: fill the method with the churn model. The method is in churn.py
             churn(dictionary)
-        else:
-            print("The form is not valid")
+
         return redirect('core:feedback')
 
 
 class HomeView(ListView):
     model = Item
-    paginate_by = 8
+    paginate_by = 5
     template_name = "home.html"
 
 
