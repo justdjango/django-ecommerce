@@ -12,25 +12,11 @@ import warnings
 def churn(dict):
     '''
     :param dict: dictionary with all the answers from the user about the form
-    :return: now it prints the dataframe, but in the future it should return the results
-    from the churn model
+    :return: customer churn prediction (numpy array) - Yes: the customer will leave, No: customer will remain
     '''
-#     df = pd.DataFrame([dict])
-#     resized_df = df.drop('capacity', axis=1)
-
-    sample = list(dict.values())
-    sample.pop(3)
-
-    cols = ['Classes_per_week', 'Happy_with_instructors', 'Happy_with_class_duration', 'Happy_with_class_timings',
-            'Happy_with_class_size', 'Happy_with_facilities', 'Happy_with_price']
-
-    sample1 = pd.DataFrame([sample], columns=cols)
-
-    sample2 = [2, 'No', 'Yes', 'No', 'No', 'Yes', 'No']
-    sample2 = pd.DataFrame([sample2], columns=cols)
+    df = pd.DataFrame([dict])
 
     dt = joblib.load("dtree_classifier2")
 
-    print('Sample2 churn: ' + dt.predict(sample2))
-
-    # print('Sample churn: ' + dt.predict(sample1))
+    print('Is the customer going to churn: ' + dt.predict(df))
+    print(dt.predict(df)[-1])

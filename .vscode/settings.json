@@ -1,5 +1,5 @@
 {
-  "python.pythonPath": "env/bin/python",
+  "python.pythonPath": "ecomm\\Scripts\\python.exe",
   "editor.formatOnSave": true,
   "python.linting.pycodestyleEnabled": true,
   "python.linting.pylintPath": "pylint",
