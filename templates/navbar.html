@@ -19,14 +19,21 @@
 
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link waves-effect" href="/checkout">
-            Checkout</a>
-          </li>
+            {% if request.user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link waves-effect" href="/checkout">
+                Checkout</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link waves-effect" href="/feedback">
+                Feedback</a>
+              </li>
+            {% else %}
             <li class="nav-item">
-            <a class="nav-link waves-effect" href="/feedback">
-            Feedback</a>
-          </li>
+                <a class="nav-link waves-effect" href="/checkout">
+                Checkout</a>
+            </li>
+            {% endif %}
         </ul>
 
         <!-- Right -->

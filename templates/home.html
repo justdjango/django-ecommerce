@@ -1,22 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div id="carousel-example-1z" class="carousel slide carousel-fade pt-4" data-ride="carousel">
 
-    <!--Indicators-->
-    <ol class="carousel-indicators">
-      <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
-      <li data-target="#carousel-example-1z" data-slide-to="1"></li>
-      <li data-target="#carousel-example-1z" data-slide-to="2"></li>
-    </ol>
-    <!--/.Indicators-->
+
+  <div id="carousel-example-2z" class="carousel slide carousel-fade" data-ride="carousel">
 
     <!--Slides-->
     <div class="carousel-inner" role="listbox">
 
       <!--First slide-->
       <div class="carousel-item">
-        <div class="view" style="background-image: url('https://www.vitstix.com/wp-content/uploads/2019/01/gym-classes-1200x400.jpg'); background-repeat: no-repeat; background-size: cover;">
+        <div class="view" style="background-image: url('https://www.vitstix.com/wp-content/uploads/2019/01/gym-classes-1200x400.jpg'); background-repeat: repeat; background-size: cover;">
 
           <!-- Mask & flexbox options-->
           <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
@@ -43,12 +37,13 @@
 
         <!--Second slide-->
       <div class="carousel-item">
-        <div class="view" style="background-image: url('https://www.westminster.ac.uk/sites/default/public-files/styles/panel_image_1_4/public/general-images/Regent-street-gym-40.png?itok=O-KzR6uU'); background-repeat: no-repeat; background-size: cover;">
+        <div class="view" style="background-image: url('https://www.westminster.ac.uk/sites/default/public-files/styles/panel_image_1_4/public/general-images/Regent-street-gym-40.png?itok=O-KzR6uU'); background-repeat: repeat; background-size: cover;">
 
           <!-- Mask & flexbox options-->
           <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
 
             <!-- Content -->
+            {% if request.user.is_authenticated %}
             <div class="text-center white-text mx-5 wow fadeIn">
               <h1 class="mb-4">
                 <strong>Your opinion matters.</strong>
@@ -58,11 +53,22 @@
                 <strong>We care about you and we are ready to change for good.
                     Take this quick survey and let us know what you think</strong>
               </p>
-
                 <button type="button" class="btn btn-outline-white btn-lg" data-toggle="modal">
                     <a href="feedback/" style="color: #fd7e14"> Take survey </a>
                 </button>
             </div>
+              {% else %}
+              <div class="text-center white-text mx-5 wow fadeIn">
+                  <h1 class="mb-4">
+                    <strong>Enjoy 30+ classes with JymBüd </strong>
+                  </h1>
+
+                  <p class="mb-4 d-none d-md-block">
+                    <strong>Sign up or log in for a full Jymbud experience.</strong>
+                  </p>
+            </div>
+
+                {% endif %}
             <!-- Content -->
 
           </div>
@@ -79,7 +85,8 @@
           <!-- Mask & flexbox options-->
           <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
 
-            <!-- Content -->
+                        <!-- Content -->
+            {% if request.user.is_authenticated %}
             <div class="text-center white-text mx-5 wow fadeIn">
               <h1 class="mb-4">
                 <strong>Your opinion matters.</strong>
@@ -89,11 +96,22 @@
                 <strong>We care about you and we are ready to change for good.
                     Take this quick survey and let us know what you think</strong>
               </p>
-
                 <button type="button" class="btn btn-outline-white btn-lg" data-toggle="modal">
                     <a href="feedback/" style="color: #fd7e14"> Take survey </a>
                 </button>
             </div>
+              {% else %}
+              <div class="text-center white-text mx-5 wow fadeIn">
+                  <h1 class="mb-4">
+                    <strong>Enjoy 30+ classes with JymBüd </strong>
+                  </h1>
+
+                  <p class="mb-4 d-none d-md-block">
+                    <strong>Sign up or log in for a full Jymbud experience.</strong>
+                  </p>
+            </div>
+
+                {% endif %}
             <!-- Content -->
 
           </div>
