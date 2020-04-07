@@ -18,5 +18,6 @@ urlpatterns = [
     path('products/<slug>/', ItemDetailView.as_view(), name='product'),
     path('add-to-cart/<slug>/', add_to_cart, name='add-to-cart'),
     path('remove-from-cart/<slug>/', remove_from_cart, name='remove-from-cart'),
-    path('feedback/', FeedbackView.as_view(), name='feedback')
+    path('feedback/', FeedbackView.as_view(), name='feedback'),
+    #path('remove-item-from-cart/<slug>/', remove_item_from_cart, name='remove-item-from-cart')
 ]

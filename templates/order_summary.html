@@ -1,56 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>{% extends "base.html" %}
+  <meta charset="UTF-8">
+  <title>{% extends "base.html" %}
 
-{% block content %}
+    {% block content %}
 
-  <main>
-    <div class="container">
+    <main>
+      <div class="container">
         <h2>.</h2>
         <h2>_______________</h2>
         <h2>Your bookings</h2>
-    <div class="table-responsive text-nowrap">
+        <div class="table-responsive text-nowrap">
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Class</th>
-            <th scope="col">Date & Time</th>
-            <th scope="col">Price</th>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Class</th>
+                <th scope="col">Date & Time</th>
+                <th scope="col">Price</th>
+                <th scope="col"> </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order_item in object.items.all %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{order_item.item.title}}</td>
+                <td>{{order_item.item.label}}</td>
+                <td>{{order_item.item.price}}</td>
+                <td>
+                  <a href="{{ order_item.item.get_remove_from_cart_url }}" class="btn orange btn-md my-0 p">
+                    Cancel booking
+                  </a>
+                </td>
+              </tr>
+              {% endfor %}
+              <tr>
+                <td colspan="4">
+                  <a class='btn btn-warning float-right' href='/checkout/'>Proceed to checkout </a>
+                  <a class='btn btn-orange float-right ml-2' href='/'>Book more classes</a> </td>
+              </tr>
+            </tbody>
+          </table>
 
-          </tr>
-        </thead>
-        <tbody>
-        {% for order_item in object.items.all %}
-          <tr>
-            <th scope="row">{{ forloop.counter }}</th>
-            <td>{{order_item.item.title}}</td>
-            <td>{{order_item.item.label}}</td>
-            <td>{{order_item.item.price}}</td>
-          </tr>
-        {% endfor %}
-        <tr>
-            <td colspan="4">
-            <a class='btn btn-orange float-right ml-2' href='/'>Book more classes</a>
-            <a class='btn btn-warning float-right' href='/checkout/'>Proceed to checkout</a> </td>
-        </tr>
-        </tbody>
-      </table>
+        </div>
 
-</div>
+      </div>
+    </main>
 
-    </div>
-  </main>
-
-{% endblock content %}
+    {% endblock content %}
 
 
-</title>
+  </title>
 </head>
+
 <body>
 
 </body>
+
 </html>

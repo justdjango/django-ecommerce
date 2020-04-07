@@ -109,6 +109,7 @@ def remove_from_cart(request, slug):
         # check if order is in order
         if order.items.filter(item__slug=item.slug).exists():
             order_item = OrderItem.objects.filter(item=item, user=request.user, ordered=False)[0]
+            #if request.method == "POST":
             order.items.remove(order_item)
             messages.info(request, "You canceled this booking.")
             return redirect("core:product", slug=slug)
@@ -119,3 +120,41 @@ def remove_from_cart(request, slug):
         # add a message saying user doesn't have an order
         messages.info(request, "You have no classes booked")
         return redirect("core:product", slug=slug)
+
+def remove_item_from_cart(request, slug):
+    item = get_object_or_404(Item, slug=slug)
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    if order_qs.exists():
+        order = order_qs[0]
+        # check if order is in order
+        if order.items.filter(item__slug=item.slug).exists():
+            order_item = OrderItem.objects.filter(item=item, user=request.user, ordered=False)[0]
+            #if request.method == "POST":
+            order.items.remove(order_item)
+            messages.info(request, "You canceled this booking.")
+            return redirect("core:order_summary", slug=slug)
+        else:
+            messages.info(request, "You did not book this class.")
+            return redirect("core:order_summary", slug=slug)
+    else:
+        # add a message saying user doesn't have an order
+        messages.info(request, "You have no classes booked")
+        return redirect("core:order_summary", slug=slug)
+
+"""
+def remove_all(request,slug):
+    item = get_object_or_404(Item, slug=slug)
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    if order_qs.exists():
+        order = order_qs[0]
+        if order.items != 0:
+            order_item = OrderItem.objects.filter(item=item, user=request.user, ordered=False)[0]
+            order.items.remove(order_item)
+        else:
+            messages.info(request, "You did not book this class.")
+            return redirect("core:product", slug=slug)
+        for order_item in order_item:
+        order.items.remove(order_item)
+    messages.info(request, "You have no classes booked")
+    return render("order_summary.html")
+"""
