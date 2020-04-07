@@ -54,7 +54,7 @@ class FeedbackView(View):
 
 class HomeView(ListView):
     model = Item
-    paginate_by = 8
+    paginate_by = 5
     template_name = "home.html"
 
 
