@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% extends "base.html" %}
+
+        {% block content %}
+
+        <main>
+            <div class="container">
+                <h2>.</h2>
+                <h2>_______________</h2>
+                <h2>Your discounts</h2>
+                <div class="table-responsive text-nowrap">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">DISCOUNT</th>
+                                <th scope="col">DESCRIPTION</th>
+                                <th scope="col">EXPIRE DATE</th>
+                                <th scope="col">CODE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order_item in object.items.all %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{{order_item.item.title}}</td>
+                                <td>{{order_item.item.label}}</td>
+                                <td>{{order_item.item.price}}</td>
+                                <td>
+                                    <a href="{{ order_item.item.get_remove_item_from_cart_url }}"
+                                        class="btn orange btn-md my-0 p">
+                                        Cancel booking
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+                                <td colspan="4">
+                                    <a class='btn btn-warning float-right' href='/checkout/'>Proceed to checkout </a>
+                                    <a class='btn btn-orange float-right ml-2' href='/'>Book more classes</a> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </main>
+
+        {% endblock content %}
+
+
+    </title>
+</head>
+
+<body>
+
+</body>
+
+</html>
