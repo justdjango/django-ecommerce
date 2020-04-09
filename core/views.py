@@ -49,7 +49,7 @@ class FeedbackView(View):
             # TODO: fill the method with the churn model. The method is in churn.py
             churn(dictionary)
 
-        return redirect('core:feedback')
+        return redirect('/')
 
 
 class HomeView(ListView):
@@ -57,6 +57,15 @@ class HomeView(ListView):
     paginate_by = 8
     template_name = "home.html"
 
+class DiscountView(LoginRequiredMixin, View):
+    def get(self, *args, **kwargs):
+        try:
+            order = Order.objects.get(user=self.request.user, ordered=False)
+            context = {'object': order}
+            return render(self.request, "discounts.html", context)
+        except ObjectDoesNotExist:
+            messages.error(self.request, "You don't have any class booked")
+            return redirect("/")
 
 class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
