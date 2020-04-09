@@ -48,8 +48,9 @@ class FeedbackView(View):
             # This method should be the one that does the churn prediction for the current user
             # TODO: fill the method with the churn model. The method is in churn.py
             churn(dictionary)
-
-        return redirect('/')
+        
+            return redirect('/discounts/')
+            
 
 
 class HomeView(ListView):

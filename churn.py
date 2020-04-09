@@ -10,6 +10,7 @@ import warnings
 
 
 def churn(dict):
+
     '''
     :param dict: dictionary with all the answers from the user about the form
     :return: customer churn prediction (numpy array) - Yes: the customer will leave, No: customer will remain
@@ -20,3 +21,11 @@ def churn(dict):
 
     print('Is the customer going to churn: ' + dt.predict(df))
     print(dt.predict(df)[-1])
+    prediction = dt.predict(df)
+    
+    def __str__(self):
+        return prediction
+
+
+
+    
