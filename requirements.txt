@@ -1,4 +1,4 @@
-pandas
+pandas~=1.0.3
 autopep8==1.4.4
 certifi==2019.3.9
 chardet==3.0.4
@@ -21,3 +21,6 @@ requests-oauthlib==1.2.0
 sqlparse==0.2.4
 stripe==2.27.0
 urllib3==1.24.2
+
+scikit-learn~=0.22.2.post1
+numpy~=1.18.2

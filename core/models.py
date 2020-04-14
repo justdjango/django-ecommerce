@@ -75,3 +75,31 @@ class Order(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+# ''' FOR RECOMMENDER '''
+
+# class RecommendedItem(models.Model):
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL,
+#                              on_delete=models.CASCADE)
+#     ordered = models.BooleanField(default=False)
+#     item = models.ForeignKey(Item, on_delete=models.CASCADE)
+#     position = item.title
+#
+#     def __str__(self):
+#         return f"{self.item.title} has position {self.position}"
+
+#
+#
+# class RecommendedItem(models.Model):
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL,
+#                              on_delete=models.CASCADE)
+#     ordered = models.BooleanField(default=False)
+#     item = models.ForeignKey(Item, on_delete=models.CASCADE)
+#
+#
+# class RecommendedList(models.Model):
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL,
+#                              on_delete=models.CASCADE)
+#     items = models.ManyToManyField(RecommendedItem)
+#     ordered = models.BooleanField(default=False)

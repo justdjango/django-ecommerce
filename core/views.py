@@ -51,11 +51,44 @@ class FeedbackView(View):
 
         return redirect('core:feedback')
 
+class NewUserView(View):
+    def get(self, *args, **kwargs):
+        # form
+        form = FeedbackForm()
+        context = {
+            'form': form
+        }
+        return render(self.request, "newuser.html", context)
+
+    def post(self, *args, **kwargs):
+        form = FeedbackForm(self.request.POST or None)
+        if form.is_valid():
+            print("The form is valid")
+            class_per_week = form.cleaned_data['Classes_per_week']
+            instructor = form.cleaned_data['Happy_with_instructors']
+            time = form.cleaned_data['Happy_with_class_duration']
+            timetable = form.cleaned_data['Happy_with_class_timings']
+            class_size = form.cleaned_data['Happy_with_class_size']
+            facilities = form.cleaned_data['Happy_with_facilities']
+            price = form.cleaned_data['Happy_with_price']
+            dictionary = {'Classes_per_week': class_per_week, 'Happy_with_instructors': instructor, 'Happy_with_class_duration': time, 'Happy_with_class_timings': timetable,
+                          'Happy_with_class_size': class_size, 'Happy_with_facilities': facilities, 'Happy_with_price': price}
+            # This method is called after the user submit their answers.
+            # This method should be the one that does the churn prediction for the current user
+            # TODO: fill the method with the churn model. The method is in churn.py
+            churn(dictionary)
+
+        return redirect('core:feedback')
+
+
+
 
 class HomeView(ListView):
     model = Item
     paginate_by = 8
     template_name = "home.html"
+    ordering = ['title']
+    context_object_name = 'classes_list'
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
@@ -71,7 +104,13 @@ class OrderSummaryView(LoginRequiredMixin, View):
 
 class ItemDetailView(DetailView):
     model = Item
+    paginate_by = 80
     template_name = "product.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(ItemDetailView, self).get_context_data(**kwargs)
+        context['classes_list'] = Item.objects.all() #filter(category=Item.category).order_by('title')
+        return context
 
 
 @login_required
@@ -119,3 +158,9 @@ def remove_from_cart(request, slug):
         # add a message saying user doesn't have an order
         messages.info(request, "You have no classes booked")
         return redirect("core:product", slug=slug)
+
+
+''' 
+This method should use RecommendedItem and RecommendedList (created in models.py).
+Should return a List of items to recommend to the user.
+'''

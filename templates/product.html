@@ -11,7 +11,7 @@
         <!--Grid column-->
         <div class="col-md-6 mb-4">
 
-          <img src="https://raw.githubusercontent.com/feiIin/django-ecommerce/SC/try/media/logojymbud.png" class="img-fluid" alt="">
+          <img src="{{ MEDIA_URL }} {{ object.image.url }}" class="img-fluid" alt="">
 
         </div>
         <!--Grid column-->
@@ -52,8 +52,78 @@
       <!--Grid row-->
 
       <hr>
-      </div>
+
       <!--Grid row-->
+      <div class="row d-flex justify-content-center wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-6 text-center">
+
+          <h4 class="my-4 h4">You may also like</h4>
+        </div>
+        <!--Grid column-->
+
+      </div>
+
+
+              <!--Section: Products v.3-->
+      <section class="text-center mb-4">
+
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+
+            {% for class in classes_list %}
+                {% if class.category == object.category and class.title != object.title %}
+          <div class="col-lg-3 col-md-6 mb-4">
+
+            <!--Card-->
+            <div class="card">
+
+              <!--Card image-->
+              <div class="view overlay">
+                <img src="{{ MEDIA_URL }} {{ class.image.url }}" class="card-img-top"
+                  alt="">
+                <a href="{{ class.get_absolute_url }}">
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+              <!--Card image-->
+
+              <!--Card content-->
+              <div class="card-body text-center">
+                <!--Category & Title-->
+                <a href="" class="grey-text">
+                  <h5>{{ class.price }}</h5>
+                </a>
+                <h5>
+                  <strong>
+                    <a href="{{ class.get_absolute_url }}" class="dark-grey-text">{{ class.title }}
+                    </a>
+                  </strong>
+                </h5>
+
+                <h6 class="font-weight-bold orange-text">
+                  <strong>{{ class.label }}</strong>
+                </h6>
+
+              </div>
+              <!--Card content-->
+
+            </div>
+            <!--Card-->
+
+          </div>
+                {% endif %}
+            {% endfor %}
+
+
+        </div>
+        <!--Grid row-->
+
+      </section>
+      <!--Section: Products v.3-->
+
+
 
     </div>
   </main>
