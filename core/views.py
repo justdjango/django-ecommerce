@@ -4,8 +4,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, View
+from django.template import Context
+
+from .CW2.recommend_new_user import new_user_recommendation_new
 from .models import Item, Order, OrderItem
-from .forms import FeedbackForm
+from .forms import FeedbackForm, NewUserForm
 from django.utils import timezone
 
 from churn import churn
@@ -20,6 +23,15 @@ def products(request):
 
 def checkout(request):
     return render(request, "checkout.html")
+
+
+def recommended_classes(request):
+    return render(request, "recommended_classes.html")
+
+
+def staff(request):
+    return render(request, "staff.html")
+
 
 
 class FeedbackView(View):
@@ -51,36 +63,37 @@ class FeedbackView(View):
 
         return redirect('core:feedback')
 
+
 class NewUserView(View):
     def get(self, *args, **kwargs):
         # form
-        form = FeedbackForm()
+        form = NewUserForm()
         context = {
             'form': form
         }
         return render(self.request, "newuser.html", context)
 
     def post(self, *args, **kwargs):
-        form = FeedbackForm(self.request.POST or None)
+        form = NewUserForm(self.request.POST)
         if form.is_valid():
             print("The form is valid")
-            class_per_week = form.cleaned_data['Classes_per_week']
-            instructor = form.cleaned_data['Happy_with_instructors']
-            time = form.cleaned_data['Happy_with_class_duration']
-            timetable = form.cleaned_data['Happy_with_class_timings']
-            class_size = form.cleaned_data['Happy_with_class_size']
-            facilities = form.cleaned_data['Happy_with_facilities']
-            price = form.cleaned_data['Happy_with_price']
-            dictionary = {'Classes_per_week': class_per_week, 'Happy_with_instructors': instructor, 'Happy_with_class_duration': time, 'Happy_with_class_timings': timetable,
-                          'Happy_with_class_size': class_size, 'Happy_with_facilities': facilities, 'Happy_with_price': price}
+            Lose_weight = form.cleaned_data['Lose_weight']
+            Stay_fit = form.cleaned_data['Stay_fit']
+            Build_muscle = form.cleaned_data['Build_muscle']
+            Stretching = form.cleaned_data['Stretching']
+            list = [Lose_weight, Stay_fit, Build_muscle, Stretching]
+            # dictionary = {'Lose_weight': Lose_weight, 'Stay_fit': Stay_fit,
+            #               'Build_muscle': Build_muscle, 'Stretching': Stretching}
             # This method is called after the user submit their answers.
             # This method should be the one that does the churn prediction for the current user
             # TODO: fill the method with the churn model. The method is in churn.py
-            churn(dictionary)
-
-        return redirect('core:feedback')
-
-
+            print("We recommend the following classes based on experiences of people with similar tastes to you:")
+            recommended_classes = new_user_recommendation_new([0, 0, 0, 0, 0, 0, 0, 0, int(list[0]), int(list[1]), int(list[2]), int(list[3])])
+            variables = {
+                'recommended': recommended_classes
+            }
+        return render(self.request, 'recommended_classes.html', variables)
+        # return redirect('core:recommended-classes')
 
 
 class HomeView(ListView):

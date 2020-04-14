@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container my-5 p-5 z-depth-1">
+
+
+<div class="jumbotron">
+    <h2 class="h1-responsive">Try these classes to start, {{ request.user.username }}!</h2>
+    <p class="lead">We recommend the following classes based on experiences
+        of people with similar tastes to you:</p>
+    <hr class="my-2">
+    {% for arg in recommended %}
+        <p> {{ arg }} </p>
+    {% endfor %}
+</div>
+
+</div>
+{% endblock content %}

@@ -46,7 +46,7 @@
             {% if request.user.is_authenticated %}
             <div class="text-center white-text mx-5 wow fadeIn">
               <h1 class="mb-4">
-                <strong>Your opinion matters.</strong>
+                <strong> {{ request.user.username }}, your opinion matters.</strong>
               </h1>
 
               <p class="mb-4 d-none d-md-block">
@@ -89,7 +89,7 @@
             {% if request.user.is_authenticated %}
             <div class="text-center white-text mx-5 wow fadeIn">
               <h1 class="mb-4">
-                <strong>Your opinion matters.</strong>
+                <strong> {{ request.user.username }}, your opinion matters.</strong>
               </h1>
 
               <p class="mb-4 d-none d-md-block">

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+orange lighten-3
+
+{% block content %}
+
+<main class="mt-5 pt-5 ">
+  <div class="container wow fadeIn">
+
+    <!-- Heading -->
+    <h2 class="card-header wow fadeIn orange-text text-center py-4">New user? Let us know your priorities and we'll help you make your first step.</h2>
+
+
+    <!--Card-->
+    <div class="card">
+
+      <!--Card content-->
+      <form method="POST" class="card-body align-self-center">
+        {% csrf_token %}
+          {{ form.errors }}
+          {{ form.non_field_errors }}
+
+        <!--Grid column-->
+        <div class="col-lg-12 col-md-6 mb-4">
+
+          <label for="zip">How important is to lose weight?</label>
+          {{ form.Lose_weight }}
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-12 col-md-6 mb-4">
+
+          <label for="zip">How important is to stay fit?</label>
+          {{ form.Stay_fit }}
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-12 col-md-6 mb-4">
+
+          <label for="zip">How important is to build muscle?</label>
+          {{ form.Build_muscle}}
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-12 col-md-6 mb-4">
+
+          <label for="country">How important is to relax and do stretching?</label>
+          {{ form.Stretching }}
+        </div>
+
+        <!--Grid column-->
+
+        <hr>
+
+        <button class="btn btn-orange btn-lg btn-block" type="submit">Leave Feedback</button>
+
+      </form>
+
+        <!--Grid column-->
+
+      </div>
+  </div>
+
+</main>
+
+{% endblock content %}

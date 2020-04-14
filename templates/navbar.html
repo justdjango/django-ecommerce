@@ -28,11 +28,20 @@
                 <a class="nav-link waves-effect" href="/feedback">
                 Feedback</a>
               </li>
+                <li class="nav-item">
+                <a class="nav-link waves-effect" href="/new-user">
+                New User?</a>
+              </li>
             {% endif %}
         </ul>
 
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
+            <li class="nav-item">
+                <a href="{% url 'core:staff' %}" class="nav-link waves-effect">
+                  <span class="clearfix d-none d-sm-inline-block"> About Us </span>
+                </a>
+              </li>
             {% if request.user.is_authenticated %}
               <li class="nav-item">
                 <a href="{% url 'core:order-summary' %}" class="nav-link waves-effect">
