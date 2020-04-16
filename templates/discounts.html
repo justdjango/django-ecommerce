@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main>
+    <div class="container">
+        <h2>.</h2>
+        <h2>_______________</h2>
+        <h2>Your discounts</h2>
+        <div class="table-responsive text-nowrap">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Discount type</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Availability</th>
+                        <th scope="col">CODE</th>
+                        <th scope="col"> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ forloop.counter}}</th>
+                        <td>DISCOUNT #RELAX</td>
+                        <td>Use this code for a free Yoga class</td>
+                        <td>06/06/2020</td>
+                        <td>RELAX5478</td>
+                        <td> <a class="btn orange btn-md my-0 p">Use Discount</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <a class='btn btn-warning float-right' href='/checkout/'>Proceed to checkout </a>
+                            <a class='btn btn-orange float-right ml-2' href='/'>Book classes</a> </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</main>
+
+{% endblock content %} 

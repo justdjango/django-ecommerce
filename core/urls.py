@@ -9,7 +9,8 @@ from .views import (
     FeedbackView,
     NewUserView,
     staff,
-    recommended_classes
+    recommended_classes,
+    DiscountView
 )
 
 app_name = 'core'
@@ -24,6 +25,7 @@ urlpatterns = [
     path('feedback/', FeedbackView.as_view(), name='feedback'),
     path('new-user/', NewUserView.as_view(), name='new-user'),
     path('staff/', staff, name='staff'),
-    path('recommended-classes/', recommended_classes, name='recommended-classes')
+    path('recommended-classes/', recommended_classes, name='recommended-classes'),
+    path('discounts/', DiscountView.as_view(), name='discount-page')
 
 ]
