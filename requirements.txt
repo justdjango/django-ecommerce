@@ -25,3 +25,4 @@ scikit-learn~=0.22.2.post1
 numpy~=1.18.2
 joblib==0.14.1
 sklearn
+xlrd
