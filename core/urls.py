@@ -5,6 +5,7 @@ from .views import (
     HomeView,
     add_to_cart,
     remove_from_cart,
+    remove_item_from_cart,
     OrderSummaryView,
     FeedbackView,
     NewUserView,
