@@ -26,6 +26,7 @@ urlpatterns = [
     path('new-user/', NewUserView.as_view(), name='new-user'),
     path('staff/', staff, name='staff'),
     path('recommended-classes/', recommended_classes, name='recommended-classes'),
-    path('discounts/', DiscountView.as_view(), name='discount-page')
+    path('discounts/', DiscountView.as_view(), name='discount-page'),
+    path('remove-item-from-cart/<slug>/', remove_item_from_cart, name='remove-item-from-cart'),
 
 ]
