@@ -10,10 +10,10 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Item title</th>
-            <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Total Item Price</th>
+            <th scope="col">Varenavn</th>
+            <th scope="col">Pris</th>
+            <th scope="col">Antall</th>
+            <th scope="col">Total Varepris</th>
         </tr>
         </thead>
         <tbody>
@@ -29,10 +29,10 @@
             </td>
             <td>
             {% if order_item.item.discount_price %}
-                ${{ order_item.get_total_discount_item_price }}
-                <span class="badge badge-primary">Saving ${{ order_item.get_amount_saved }}</span>
+                {{ order_item.get_total_discount_item_price }}Kr
+                <span class="badge badge-primary">Saving {{ order_item.get_amount_saved }}Kr</span>
             {% else %}
-                ${{ order_item.get_total_item_price }}
+                {{ order_item.get_total_item_price }}Kr
             {% endif %}
             <a style='color: red;' href="{% url 'core:remove-from-cart' order_item.item.slug %}">
                 <i class="fas fa-trash float-right"></i>
@@ -52,18 +52,18 @@
         {% if object.coupon %}
         <tr>
             <td colspan="4"><b>Coupon</b></td>
-            <td><b>-${{ object.coupon.amount }}</b></td>
+            <td><b>{{ object.coupon.amount }}-Kr</b></td>
         </tr>
         {% endif %}
         {% if object.get_total %}
         <tr>
             <td colspan="4"><b>Order Total</b></td>
-            <td><b>${{ object.get_total }}</b></td>
+            <td><b>{{ object.get_total }}-Kr</b></td>
         </tr>
         <tr>
             <td colspan="5">
-            <a class='btn btn-warning float-right ml-2' href='/checkout/'>Proceed to checkout</a>
-            <a class='btn btn-primary float-right' href='/'>Continue shopping</a>
+            <a class='btn btn-warning float-right ml-2' href='/checkout/'>Fortsett til betaling</a>
+            <a class='btn btn-primary float-right' href='/'>Fortsett handel</a>
             </td>
         </tr>
         {% endif %}

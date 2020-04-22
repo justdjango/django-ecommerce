@@ -5,7 +5,7 @@
 
       <!-- Brand -->
       <a class="navbar-brand waves-effect" href="/">
-        <strong class="blue-text">DJe-commerce</strong>
+        <strong class="blue-text">Solan Kiosk</strong>
       </a>
 
       <!-- Collapse -->
@@ -20,7 +20,7 @@
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
           {% comment %} <li class="nav-item active">
-            <a class="nav-link waves-effect" href="/">Home
+            <a class="nav-link waves-effect" href="/">Hjem
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -37,23 +37,23 @@
             <a href="{% url 'core:order-summary' %}" class="nav-link waves-effect">
               <span class="badge red z-depth-1 mr-1"> {{ request.user|cart_item_count }} </span>
               <i class="fas fa-shopping-cart"></i>
-              <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+              <span class="clearfix d-none d-sm-inline-block"> Handlevogn </span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
-              <span class="clearfix d-none d-sm-inline-block"> Logout </span>
+              <span class="clearfix d-none d-sm-inline-block"> Logg ut </span>
             </a>
           </li>
           {% else %}
           <li class="nav-item">
             <a class="nav-link waves-effect" href="{% url 'account_login' %}">
-              <span class="clearfix d-none d-sm-inline-block"> Login </span>
+              <span class="clearfix d-none d-sm-inline-block"> Log inn </span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
-              <span class="clearfix d-none d-sm-inline-block"> Signup </span>
+              <span class="clearfix d-none d-sm-inline-block"> Register </span>
             </a>
           </li>
           {% endif %}
