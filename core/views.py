@@ -607,7 +607,6 @@ def study_callback(request):
         messages.error(
             request, "Forespørselen mangler påkrevde felter, vennligst prøv igjen."
         )
-        print("Forespørselen mangler påkrevde felter, vennligst prøv igjen.")
         return redirect('http://127.0.0.1:8000')
     if (
             not request.session.get("dataporten_study_state", "")
@@ -616,7 +615,6 @@ def study_callback(request):
         messages.error(
             request, "Verifisering av forespørselen feilet. Vennligst prøv igjen."
         )
-        print("Verifisering av forespørselen feilet. Vennligst prøv igjen.")
         return redirect('http://127.0.0.1:8000')
 
     args = {
@@ -648,9 +646,8 @@ def study_callback(request):
         login(request, user)
         messages.success(
             request,
-            "Du er allerede et medlem av Solan linjeforening!"
+            "Du er nå logget inn og kan begynne å handle varer!"
         )
-        print("Du er allerede et medlem av Solan linjeforenings nettside!")
         return redirect('http://127.0.0.1:8000')
     is_approved = approve_member(ntnu_username, ntnu_mail, groups)
     if not is_approved:
@@ -658,7 +655,6 @@ def study_callback(request):
             request,
             "Du er ikke medlem av Solan linjeforening"
         )
-        print("Du er ikke medlem av Solan linjeforening")
 
         return redirect('http://127.0.0.1:8000')
     if is_approved:
@@ -667,11 +663,10 @@ def study_callback(request):
             login(request, user)
             messages.success(
                 request,
-                "Du er nå et medlem av Solan linjeforening!"
+                "Du er nå logget inn og kan begynne å handle varer!"
             )
-            print("Du er nå et medlem av Solan linjeforenings nettside!")
             return redirect('http://127.0.0.1:8000')
-    messages.error(request,"Noe gikk galt")
+    messages.error(request,"Noe gikk galt, prøv igjen")
     return redirect('http://127.0.0.1:8000')
 
 def logout_view(request):
