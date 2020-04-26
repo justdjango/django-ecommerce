@@ -671,4 +671,5 @@ def study_callback(request):
 
 def logout_view(request):
     logout(request)
+    messages.success(request, "Du er nå logget ut av kiosken.")
     return redirect('core:home')
