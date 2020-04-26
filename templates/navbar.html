@@ -41,19 +41,14 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
+            <a class="nav-link waves-effect" href="/logout">
               <span class="clearfix d-none d-sm-inline-block"> Logg ut </span>
             </a>
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="{% url 'account_login' %}">
+            <a class="nav-link waves-effect" href="/study">
               <span class="clearfix d-none d-sm-inline-block"> Log inn </span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
-              <span class="clearfix d-none d-sm-inline-block"> Register </span>
             </a>
           </li>
           {% endif %}
