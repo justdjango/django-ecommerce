@@ -41,11 +41,11 @@
         </tr>
         {% empty %}
         <tr>
-            <td colspan='5'>Your cart is empty</td>
+            <td colspan='5'>Handlevognen er tom</td>
         </tr>
         <tr>
             <td colspan="5">
-            <a class='btn btn-primary float-right' href='/'>Continue shopping</a>
+            <a class='btn btn-primary float-right' href='/'>Fortsett handel</a>
             </td>
         </tr>
         {% endfor %}
@@ -57,7 +57,7 @@
         {% endif %}
         {% if object.get_total %}
         <tr>
-            <td colspan="4"><b>Order Total</b></td>
+            <td colspan="4"><b>Sum</b></td>
             <td><b>{{ object.get_total }}-Kr</b></td>
         </tr>
         <tr>
