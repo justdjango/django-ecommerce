@@ -1,12 +1,12 @@
 {
   "python.pythonPath": "${workspaceFolder}/env/bin/python3",
   "editor.formatOnSave": true,
-  "python.linting.pep8Enabled": true,
+  "python.linting.pycodestyleEnabled": true,
   "python.linting.pylintPath": "pylint",
   "python.linting.pylintArgs": ["--load-plugins", "pylint_django"],
   "python.linting.pylintEnabled": true,
   "python.venvPath": "${workspaceFolder}/env/bin/python3",
-  "python.linting.pep8Args": ["--ignore=E501"],
+  "python.linting.pycodestyleArgs": ["--ignore=E501"],
   "files.exclude": {
     "**/*.pyc": true
   }

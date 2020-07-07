@@ -2,7 +2,7 @@ autopep8==1.4.4
 certifi==2019.3.9
 chardet==3.0.4
 defusedxml==0.6.0
-Django==2.2
+Django==2.2.14
 django-allauth==0.39.1
 django-countries==5.3.3
 django-crispy-forms==1.7.2
@@ -10,7 +10,7 @@ django-debug-toolbar==1.10.1
 idna==2.8
 oauthlib==3.0.1
 pep8==1.7.1
-Pillow==6.0.0
+Pillow==6.2.2
 pycodestyle==2.5.0
 python-decouple==3.1
 python3-openid==3.1.0
