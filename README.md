@@ -10,7 +10,7 @@ This is a very simple e-commerce website built with Django.
 
 ## Deprecation warning
 
-This project was created over two years ago. Since then, there is a newer version of the project which you can find [here](https://github.com/justdjango/django-simple-ecommerce)
+This project was created almost two years ago. Since then, there is a newer version of the project which you can find [here](https://github.com/justdjango/django-simple-ecommerce)
 
 ---
 
