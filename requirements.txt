@@ -7,6 +7,7 @@ django-allauth==0.39.1
 django-countries==5.3.3
 django-crispy-forms==1.7.2
 django-debug-toolbar==1.10.1
+django-jazzmin==2.2.6
 idna==2.8
 oauthlib==3.0.1
 pep8==1.7.1

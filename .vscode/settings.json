@@ -1,5 +1,5 @@
 {
-  "python.pythonPath": "${workspaceFolder}/env/bin/python3",
+  "python.pythonPath": "C:\\Users\\Roshan Thomas\\Anaconda3\\python.exe",
   "editor.formatOnSave": true,
   "python.linting.pycodestyleEnabled": true,
   "python.linting.pylintPath": "pylint",
