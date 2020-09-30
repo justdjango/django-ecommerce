@@ -1,4 +1,4 @@
-import random
+import random #This is for random value.
 import string
 
 import stripe
