@@ -1,4 +1,4 @@
-# Django E-commerce
+# Django E-commerce Setup
 
 This is a very simple e-commerce website built with Django.
 
