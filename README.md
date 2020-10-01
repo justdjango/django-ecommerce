@@ -1,4 +1,4 @@
-# Django E-commerce
+# Django E-Commerce (An Amazing Project.)
 
 This is a very simple e-commerce website built with Django.
 
