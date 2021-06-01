@@ -19,4 +19,4 @@ requests==2.21.0
 requests-oauthlib==1.2.0
 sqlparse==0.2.4
 stripe==2.27.0
-urllib3==1.24.2
+urllib3==1.26.5
