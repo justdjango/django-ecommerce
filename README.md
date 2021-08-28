@@ -22,7 +22,7 @@ This is a very simple e-commerce website built with Django.
 
 
 
-### New Site 
+# New Updated Site and Design
 ![image](https://github.com/AdityaPrabhuCS/django-ecommerce/blob/44fae5f1f4f65b1d46d58e6aee1f1dc2b5ac9bc5/new.png)
 ---
 
