@@ -1,20 +1,21 @@
-{% extends "base.html" %}
+{% extends 'base.html' %} 
+{% load static %} 
 {% load crispy_forms_tags %}
-
 {% block content %}
-  <main>
-    <div class="container">
 
-    <h2>Request Refund</h2>
-    <form method="POST">
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 offset-3 mt-3">
+      <h2>Request Refund</h2>
+      <form method="POST">
         {% csrf_token %}
-        {{ form|crispy }}
-        <button type='submit' class='btn btn-primary'>Submit</button>
-    </form>
-
+        {{form|crispy}}
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+     
     </div>
-  </main>
+  </div>
+</div>
 
 {% endblock content %}
-
-
