@@ -1,8 +1,9 @@
-{% extends "base.html" %}
+{% extends 'base.html' %} 
+{% load static %} 
+{% load crispy_forms_tags %}
 
 {% block extra_head %}
 <style>
-
 #stripeBtnLabel {
   font-family: "Helvetica Neue", Helvetica, sans-serif;
   font-size: 16px;
@@ -13,7 +14,6 @@
   font-weight: 500;
   display: block;
 }
-
 #stripeBtn {
   border: none;
   border-radius: 4px;
@@ -36,81 +36,103 @@
   float: left;
   width: 100%
 }
-
 button:hover {
   transform: translateY(-1px);
   box-shadow: 0 7px 14px rgba(50, 50, 93, .10), 0 3px 6px rgba(0, 0, 0, .08);
   background-color: #43458b;
 }
-
 .stripe-form {
   padding: 5px 30px;
 }
-
 #card-errors {
   height: 20px;
   padding: 4px 0;
   color: #fa755a;
 }
-
 .stripe-form-row {
   width: 100%;
   float: left;
   margin-top: 5px;
   margin-bottom: 5px;
 }
-
 /**
  * The CSS shown here will not be introduced in the Quickstart guide, but shows
  * how you can use CSS to style your Element's container.
  */
 .StripeElement {
   box-sizing: border-box;
-
   height: 40px;
-
   padding: 10px 12px;
-
   border: 1px solid transparent;
   border-radius: 4px;
   background-color: white;
-
   box-shadow: 0 1px 3px 0 #e6ebf1;
   -webkit-transition: box-shadow 150ms ease;
   transition: box-shadow 150ms ease;
 }
-
 .StripeElement--focus {
   box-shadow: 0 1px 3px 0 #cfd7df;
 }
-
 .StripeElement--invalid {
   border-color: #fa755a;
 }
-
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
 }
-
 .current-card-form {
   display: none;
 }
-
 </style>
 {% endblock extra_head %}
 
 {% block content %}
 
-  <main >
-    <div class="container wow fadeIn">
 
-      <h2 class="my-5 h2 text-center">Payment</h2>
+   <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
 
-      <div class="row">
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da !important;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
 
-        <div class="col-md-12 mb-4">
-          <div class="card">
 
+    </style>
+  
+ 
+    <div class="container" style="margin-top: 50px;">
+
+
+  <div class="row">
+
+
+    <div class="col-md-8 order-md-1 card" >
+    	<h4 class="mb-3" style=" margin-top: 26px;">Payment form</h4>
+    
+          <script src="https://js.stripe.com/v3/"></script>
             {% if card %}
               <div style="padding: 5px 30px;">
                 <div class="custom-control custom-checkbox">
@@ -154,28 +176,30 @@ button:hover {
                   <div id="card-errors" role="alert"></div>
               </form>
             </div>
-
-          </div>
-        </div>
-
-        {% include "order_snippet.html" %}
-
-      </div>
-
     </div>
-  </main>
 
+    {% include "order_snippet.html" %}
+
+  </div>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2017-2019 Company Name</p>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="#">Privacy</a></li>
+      <li class="list-inline-item"><a href="#">Terms</a></li>
+      <li class="list-inline-item"><a href="#">Support</a></li>
+    </ul>
+  </footer>
+</div>
 {% endblock content %}
+
 
 {% block extra_scripts %}
 
-<script src="https://js.stripe.com/v3/"></script>
 <script nonce="">  // Create a Stripe client.
-  var stripe = Stripe('{{STRIPE_PUBLIC_KEY}}');
-
+  var stripe = Stripe('pk_test_lX3r6OMjOU2yzFsNSHq6belT00EY82kZmH');
   // Create an instance of Elements.
   var elements = stripe.elements();
-
   // Custom styling can be passed to options when creating an Element.
   // (Note that this demo uses a wider set of styles than the guide below.)
   var style = {
@@ -193,13 +217,10 @@ button:hover {
       iconColor: '#fa755a'
     }
   };
-
   // Create an instance of the card Element.
   var card = elements.create('card', {style: style});
-
   // Add an instance of the card Element into the `card-element` <div>.
   card.mount('#card-element');
-
   // Handle real-time validation errors from the card Element.
   card.addEventListener('change', function(event) {
     var displayError = document.getElementById('card-errors');
@@ -209,12 +230,10 @@ button:hover {
       displayError.textContent = '';
     }
   });
-
   // Handle form submission.
   var form = document.getElementById('stripe-form');
   form.addEventListener('submit', function(event) {
     event.preventDefault();
-
     stripe.createToken(card).then(function(result) {
       if (result.error) {
         // Inform the user if there was an error.
@@ -226,7 +245,6 @@ button:hover {
       }
     });
   });
-
   // Submit the form with the token ID.
   function stripeTokenHandler(token) {
     // Insert the token ID into the form so it gets submitted to the server
@@ -236,11 +254,9 @@ button:hover {
     hiddenInput.setAttribute('name', 'stripeToken');
     hiddenInput.setAttribute('value', token.id);
     form.appendChild(hiddenInput);
-
     // Submit the form
     form.submit();
   }
-
   var currentCardForm = $('.current-card-form');
   var newCardForm = $('.new-card-form');
   var use_default_card = document.querySelector("input[name=use_default_card]");
@@ -253,11 +269,6 @@ button:hover {
       currentCardForm.hide()
     }
   })
-
 </script>
 
 {% endblock extra_scripts %}
-
-
-
-

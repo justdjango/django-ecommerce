@@ -8,10 +8,7 @@
     The Definitive Django Learning Platform.
   </p>
 </p>
-
-### *** Deprecation warning ***
-
-This project was created almost two years ago. Since then, there is a newer version of the project which you can find [here](https://github.com/justdjango/django-simple-ecommerce)
+(https://github.com/justdjango/django-simple-ecommerce)
 
 ---
 
@@ -20,9 +17,13 @@ This project was created almost two years ago. Since then, there is a newer vers
 This is a very simple e-commerce website built with Django.
 
 ## Quick demo
-
+### Old Site 
 [![alt text](https://justdjango.s3-us-west-2.amazonaws.com/media/gifs/djecommerce.gif "Logo")](https://youtu.be/z4USlooVXG0)
 
+
+
+# New Updated Site and Design
+![image](https://github.com/AdityaPrabhuCS/django-ecommerce/blob/44fae5f1f4f65b1d46d58e6aee1f1dc2b5ac9bc5/new.png)
 ---
 
 ## Project Summary
@@ -62,6 +63,8 @@ pip install -r requirements.txt
 Now you can run the project with this command
 
 ```
+python manage.py migrate
+python manage.py makemigrations
 python manage.py runserver
 ```
 
@@ -97,3 +100,25 @@ If you're learning Django and want to take your next step to become a profession
 <a href="https://www.twitter.com/justdjangocode" target="_blank"><img src="https://img.shields.io/badge/Twitter-%231877F2.svg?&style=flat-square&logo=twitter&logoColor=white" alt="Twitter"></a>
 
 </div>
+
+
+
+
+## Changes Done
+#### Shop Page
+#### Responsive layout
+#### Multiple Objects and Orders
+#### Updated and changed to latest version 
+#### Filtering
+#### Order Summary and Order Snippet
+
+### Solved Issues
+##### https://github.com/justdjango/django-ecommerce/issues/64#issue-783238792
+##### https://github.com/justdjango/django-ecommerce/issues/83#issue-936408183
+##### https://github.com/justdjango/django-ecommerce/issues/76#issue-894100040
+##### https://github.com/justdjango/django-ecommerce/issues/69#issue-832738465
+##### https://github.com/justdjango/django-ecommerce/issues/64#issue-783238792
+##### https://github.com/justdjango/django-ecommerce/issues/68#issue-827662878
+
+
+

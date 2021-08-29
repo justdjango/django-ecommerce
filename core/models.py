@@ -1,21 +1,21 @@
-from django.db.models.signals import post_save
 from django.conf import settings
 from django.db import models
 from django.db.models import Sum
 from django.shortcuts import reverse
 from django_countries.fields import CountryField
 
-
+# Create your models here.
 CATEGORY_CHOICES = (
-    ('S', 'Shirt'),
-    ('SW', 'Sport wear'),
-    ('OW', 'Outwear')
+    ('SB', 'Shirts And Blouses'),
+    ('TS', 'T-Shirts'),
+    ('SK', 'Skirts'),
+    ('HS', 'Hoodies&Sweatshirts')
 )
 
 LABEL_CHOICES = (
-    ('P', 'primary'),
-    ('S', 'secondary'),
-    ('D', 'danger')
+    ('S', 'sale'),
+    ('N', 'new'),
+    ('P', 'promotion')
 )
 
 ADDRESS_CHOICES = (
@@ -24,25 +24,44 @@ ADDRESS_CHOICES = (
 )
 
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    stripe_customer_id = models.CharField(max_length=50, blank=True, null=True)
-    one_click_purchasing = models.BooleanField(default=False)
+class Slide(models.Model):
+    caption1 = models.CharField(max_length=100)
+    caption2 = models.CharField(max_length=100)
+    link = models.CharField(max_length=100)
+    image = models.ImageField(help_text="Size: 1920x570")
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.user.username
+        return "{} - {}".format(self.caption1, self.caption2)
+
+class Category(models.Model):
+    title = models.CharField(max_length=100)
+    slug = models.SlugField()
+    description = models.TextField()
+    image = models.ImageField()
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse("core:category", kwargs={
+            'slug': self.slug
+        })
 
 
 class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
     discount_price = models.FloatField(blank=True, null=True)
-    category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     label = models.CharField(choices=LABEL_CHOICES, max_length=1)
     slug = models.SlugField()
-    description = models.TextField()
+    stock_no = models.CharField(max_length=10)
+    description_short = models.CharField(max_length=50)
+    description_long = models.TextField()
     image = models.ImageField()
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
@@ -91,15 +110,15 @@ class OrderItem(models.Model):
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
-    ref_code = models.CharField(max_length=20, blank=True, null=True)
+    ref_code = models.CharField(max_length=20)
     items = models.ManyToManyField(OrderItem)
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
     shipping_address = models.ForeignKey(
-        'Address', related_name='shipping_address', on_delete=models.SET_NULL, blank=True, null=True)
+        'BillingAddress', related_name='shipping_address', on_delete=models.SET_NULL, blank=True, null=True)
     billing_address = models.ForeignKey(
-        'Address', related_name='billing_address', on_delete=models.SET_NULL, blank=True, null=True)
+        'BillingAddress', related_name='billing_address', on_delete=models.SET_NULL, blank=True, null=True)
     payment = models.ForeignKey(
         'Payment', on_delete=models.SET_NULL, blank=True, null=True)
     coupon = models.ForeignKey(
@@ -111,10 +130,9 @@ class Order(models.Model):
 
     '''
     1. Item added to cart
-    2. Adding a billing address
-    (Failed checkout)
+    2. Adding a BillingAddress
+    (Failed Checkout)
     3. Payment
-    (Preprocessing, processing, packaging etc.)
     4. Being delivered
     5. Received
     6. Refunds
@@ -132,7 +150,7 @@ class Order(models.Model):
         return total
 
 
-class Address(models.Model):
+class BillingAddress(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     street_address = models.CharField(max_length=100)
@@ -146,7 +164,7 @@ class Address(models.Model):
         return self.user.username
 
     class Meta:
-        verbose_name_plural = 'Addresses'
+        verbose_name_plural = 'BillingAddresses'
 
 
 class Payment(models.Model):
@@ -176,11 +194,3 @@ class Refund(models.Model):
 
     def __str__(self):
         return f"{self.pk}"
-
-
-def userprofile_receiver(sender, instance, created, *args, **kwargs):
-    if created:
-        userprofile = UserProfile.objects.create(user=instance)
-
-
-post_save.connect(userprofile_receiver, sender=settings.AUTH_USER_MODEL)
