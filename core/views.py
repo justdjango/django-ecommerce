@@ -350,7 +350,12 @@ class HomeView(ListView):
     paginate_by = 10
     template_name = "home.html"
 
-
+class CategoryShoesView(ListView):
+    model = Item
+    paginate_by = 10
+    print (model)
+    '''template_name = "home.html"
+'''
 class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
@@ -367,7 +372,6 @@ class OrderSummaryView(LoginRequiredMixin, View):
 class ItemDetailView(DetailView):
     model = Item
     template_name = "product.html"
-
 
 @login_required
 def add_to_cart(request, slug):
