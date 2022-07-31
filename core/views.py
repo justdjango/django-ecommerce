@@ -350,12 +350,13 @@ class HomeView(ListView):
     paginate_by = 10
     template_name = "home.html"
 
-class CategoryShoesView(ListView):
+class HomeShoesView(ListView):
     model = Item
+    queryset = Item.objects.filter(category='Z')
     paginate_by = 10
     print (model)
-    '''template_name = "home.html"
-'''
+    template_name = "home_shoes.html"
+
 class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
