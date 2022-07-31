@@ -4,6 +4,8 @@ from .views import (
     CheckoutView,
     HomeView,
     HomeShoesView,
+    HomeBootsView,
+    HomeChildShoesView,
     OrderSummaryView,
     add_to_cart,
     remove_from_cart,
@@ -18,6 +20,8 @@ app_name = 'core'
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('shoes/', HomeShoesView.as_view(), name='home-shoes'),
+    path('boots/', HomeBootsView.as_view(), name='home-boots'),
+    path('child_shoes/', HomeChildShoesView.as_view(), name='home-child-shoes'),
     path('checkout/', CheckoutView.as_view(), name='checkout'),
     path('order-summary/', OrderSummaryView.as_view(), name='order-summary'),
     path('product/<slug>/', ItemDetailView.as_view(), name='product'),
