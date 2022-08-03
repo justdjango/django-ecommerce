@@ -3,6 +3,7 @@ from .views import (
     ItemDetailView,
     CheckoutView,
     HomeView,
+    filtros,
     HomeShoesView,
     HomeBootsView,
     HomeChildShoesView,
@@ -19,6 +20,7 @@ app_name = 'core'
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
+    path('filtros/', filtros, name='filtros'),
     path('shoes/', HomeShoesView.as_view(), name='home-shoes'),
     path('boots/', HomeBootsView.as_view(), name='home-boots'),
     path('child_shoes/', HomeChildShoesView.as_view(), name='home-child-shoes'),
