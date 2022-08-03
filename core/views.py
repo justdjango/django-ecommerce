@@ -345,6 +345,16 @@ class PaymentView(View):
         return redirect("/payment/stripe/")
 
 
+def filtros(request):
+    if request.method=="POST":
+        categories=request.POST.get("category")
+        colors=request.POST.get("color")
+        searchst=Item.objects.filter(category=categories).filter(color=colors)
+        return render(request, 'filtros.html', {'data':searchst})
+    else:
+        itemdisplays=Item.objects.all()
+        return render(request, 'filtros.html', {'data':itemdisplays})
+
 class HomeView(ListView):
     model = Item
     paginate_by = 10
