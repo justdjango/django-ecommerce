@@ -42,7 +42,8 @@
             <p class="lead font-weight-bold">Description</p>
 
             <p>{{ object.description }}</p>
-
+            <p class="lead font-weight-bold">Color: </p>
+            <p>{{ object.color }}</p>
             {% comment %} <form class="d-flex justify-content-left">
               <!-- Default input -->
               <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
@@ -80,8 +81,8 @@
           <h4 class="my-4 h4">Additional information</h4>
 
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit
-            voluptates,
-            quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.</p>
+          voluptates,
+          quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.</p>
 
         </div>
         <!--Grid column-->
@@ -122,4 +123,4 @@
     </div>
   </main>
 
-{% endblock content %}
+  {% endblock content %}

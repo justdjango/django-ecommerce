@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>filtros</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js"></script>
+  </head>
+
+  <body>
+    <center>
+      <h1>Filtros</h1>
+      <form method="post">
+       {% csrf_token%}
+      <input type="radio" value="Z" name="category"/> Zapatos |
+      <input type="radio" value="NZ" name="category"/> Zapatos Niños |
+      <input type="radio" value="B" name="category"/> Botas |
+      <br>
+      <input type="radio" value="negro" name="color"/> negro |
+      <input type="radio" value="blanco" name="color"/> blanco|
+      <input type="submit" value="search"/>
+      {% for showdata in data %}
+      <h1>{{showdata.title}}</h1>
+      {% endfor %}
+      </form>
+    </center>
+
+  </body>
+
+</html>
+

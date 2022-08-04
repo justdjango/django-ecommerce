@@ -213,7 +213,7 @@ class PaymentView(View):
             context = {
                 'order': order,
                 'DISPLAY_COUPON_FORM': False,
-                'STRIPE_PUBLIC_KEY' : settings.STRIPE_PUBLIC_KEY
+                'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
             }
             userprofile = self.request.user.userprofile
             if userprofile.one_click_purchasing:
@@ -345,10 +345,44 @@ class PaymentView(View):
         return redirect("/payment/stripe/")
 
 
+def filtros(request):
+    if request.method=="POST":
+        categories=request.POST.get("category")
+        colors=request.POST.get("color")
+        searchst=Item.objects.filter(category=categories).filter(color=colors)
+        return render(request, 'filtros.html', {'data':searchst})
+    else:
+        itemdisplays=Item.objects.all()
+        return render(request, 'filtros.html', {'data':itemdisplays})
+
 class HomeView(ListView):
     model = Item
     paginate_by = 10
     template_name = "home.html"
+
+
+class HomeShoesView(ListView):
+    model = Item
+    queryset = Item.objects.filter(category='Z')
+    paginate_by = 10
+    print(model)
+    template_name = "home_shoes.html"
+
+
+class HomeBootsView(ListView):
+    model = Item
+    queryset = Item.objects.filter(category='B')
+    paginate_by = 10
+    print(model)
+    template_name = "home_boots.html"
+
+
+class HomeChildShoesView(ListView):
+    model = Item
+    queryset = Item.objects.filter(category='NZ')
+    paginate_by = 10
+    print(model)
+    template_name = "home_child_shoes.html"
 
 
 class OrderSummaryView(LoginRequiredMixin, View):

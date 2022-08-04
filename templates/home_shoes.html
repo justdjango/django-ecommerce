@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load cart_template_tags %}
 
 {% block content %}
   <main>
@@ -28,13 +27,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="shoes">Zapatos</a>
+              <a class="nav-link" href="#">Zapatos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="boots">Botas</a>
+              <a class="nav-link" href="#">Botas</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="child_shoes">Niños Zapatos</a>
+              <a class="nav-link" href="#">Niños Zapatos</a>
             </li>
 
           </ul>
@@ -82,11 +81,11 @@
 
                 <h4 class="font-weight-bold blue-text">
                   <strong>$
-                  {% if item.discount_price %}
-                  {{ item.discount_price }}
-                  {% else %}
-                  {{ item.price }}
-                  {% endif %}
+                    {% if item.discount_price %}
+                    {{ item.discount_price }}
+                    {% else %}
+                    {{ item.price }}
+                    {% endif %}
                   </strong>
                 </h4>
 
@@ -137,6 +136,6 @@
     </div>
   </main>
 
-{% endblock content %}
+  {% endblock content %}
 
 
