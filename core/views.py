@@ -350,12 +350,23 @@ def filtros(request):
         print("aplicacndo filtros")
         categories=request.POST.get("category")
         colors=request.POST.get("color")
+        priceMin= request.POST.get("price_min")
+        priceMax= request.POST.get("price_max")
         print(categories)
         print(colors)
-        if colors == None:
+        print(priceMin)
+        print(priceMax)
+
+        if (colors == None and str(priceMax)=="" and str(priceMin)==""):
             print("no hay color")
+            searchst=Item.objects.filter(category=categories).filter(price__gte = float(priceMin), price__lte= float(priceMax))
+            return render(request, 'filtros.html', {'data':searchst})
+
+        elif (priceMax=="" and priceMin==""):
+            print("sin precio y sin color")
             searchst=Item.objects.filter(category=categories)
             return render(request, 'filtros.html', {'data':searchst})
+
         else:
             searchst=Item.objects.filter(category=categories).filter(color=colors)
             return render(request, 'filtros.html', {'data':searchst})
