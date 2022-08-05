@@ -358,18 +358,33 @@ def filtros(request):
         print(priceMax)
 
         if (colors == None and str(priceMax)=="" and str(priceMin)==""):
-            print("sin precio y sin color")
+            print("solor categoria")
             searchst=Item.objects.filter(category=categories)
             return render(request, 'filtros.html', {'data':searchst})
 
+        elif (categories==None and colors==None):
+            print("solo precio")
+            searchst=Item.objects.filter(price__gte = float(priceMin), price__lte= float(priceMax))
+            return render(request, 'filtros.html', {'data':searchst})
+
+        elif (categories==None and str(priceMax)=="" and str(priceMin)==""):
+            print("solo color")
+            searchst=Item.objects.filter(price__gte = float(priceMin), price__lte= float(priceMax))
+            return render(request, 'filtros.html', {'data':searchst})
+
         elif (priceMax=="" and priceMin==""):
-            print("no hay precio")
+            print("categoria y color")
             searchst=Item.objects.filter(category=categories).filter(color=colors)
             return render(request, 'filtros.html', {'data':searchst})
 
         elif colors==None:
-            print("no hay color")
+            print("categoria y precio")
             searchst=Item.objects.filter(category=categories).filter(price__gte = float(priceMin), price__lte= float(priceMax))
+            return render(request, 'filtros.html', {'data':searchst})
+
+        elif categories==None:
+            print("color y precio")
+            searchst=Item.objects.filter(color=colors).filter(price__gte = float(priceMin), price__lte= float(priceMax))
             return render(request, 'filtros.html', {'data':searchst})
 
         else:
