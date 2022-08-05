@@ -347,10 +347,18 @@ class PaymentView(View):
 
 def filtros(request):
     if request.method=="POST":
+        print("aplicacndo filtros")
         categories=request.POST.get("category")
         colors=request.POST.get("color")
-        searchst=Item.objects.filter(category=categories).filter(color=colors)
-        return render(request, 'filtros.html', {'data':searchst})
+        print(categories)
+        print(colors)
+        if colors == None:
+            print("no hay color")
+            searchst=Item.objects.filter(category=categories)
+            return render(request, 'filtros.html', {'data':searchst})
+        else:
+            searchst=Item.objects.filter(category=categories).filter(color=colors)
+            return render(request, 'filtros.html', {'data':searchst})
     else:
         itemdisplays=Item.objects.all()
         return render(request, 'filtros.html', {'data':itemdisplays})
