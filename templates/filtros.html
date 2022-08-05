@@ -12,12 +12,22 @@
       <h1>Filtros</h1>
       <form method="post">
        {% csrf_token%}
+      <!-- modelo -->
       <input type="radio" value="Z" name="category"/> Zapatos |
       <input type="radio" value="NZ" name="category"/> Zapatos Niños |
       <input type="radio" value="B" name="category"/> Botas |
       <br>
+      <!-- color -->
       <input type="radio" value="negro" name="color"/> negro |
       <input type="radio" value="blanco" name="color"/> blanco|
+      <br>
+      <!-- precio -->
+      <label>MIn</label>
+      <input type="input" name="price_min">
+      <label>MAX</label>
+      <input type="input" name="price_max">
+
+      <!-- boton de busqueda -->
       <input type="submit" value="search"/>
       {% for showdata in data %}
       <h1>{{showdata.title}}</h1>
