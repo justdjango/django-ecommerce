@@ -2,162 +2,130 @@
 {% load cart_template_tags %}
 
 {% block content %}
-  <main>
-    <div class="container">
+<main>
+  <div class="container">
 
-      <!--Navbar-->
-      <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
 
-        <!-- Navbar brand -->
-        <span class="navbar-brand">Categorias:</span>
+      <!-- Navbar brand -->
+      <span class="navbar-brand">"Slogan":</span>
 
-        <!-- Collapse button -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <!-- Collapse button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+        aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+    <!--/.Navbar-->
 
-        <!-- Collapsible content -->
-        <div class="collapse navbar-collapse" id="basicExampleNav">
+    <!--Section: Products v.3-->
+    <section class="text-center mb-4">
+      <center>
+        <h1>Filtros</h1>
+        <form method="post">
+          {% csrf_token%}
+          <!-- modelo -->
+          <input type="radio" value="Z" name="category" /> Zapatos |
+          <input type="radio" value="NZ" name="category" /> Zapatos Niños |
+          <input type="radio" value="B" name="category" /> Botas |
+          <br>
+          <!-- color -->
+          <input type="radio" value="negro" name="color" /> negro |
+          <input type="radio" value="blanco" name="color" /> blanco|
+          <br>
+          <!-- precio -->
+          <label>MIn</label>
+          <input type="input" name="price_min">
+          <label>MAX</label>
+          <input type="input" name="price_max">
 
-          <!-- Links -->
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="filtros">Filtros
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="shoes">Zapatos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="boots">Botas</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="child_shoes">Niños Zapatos</a>
-            </li>
+          <!-- boton de busqueda -->
+          <input type="submit" value="search" />
+          <div class="row wow fadeIn">
 
-          </ul>
-          <!-- Links -->
+            {% for item in data %}
+            <div class="col-lg-3 col-md-6 mb-4">
 
-          <form class="form-inline">
-            <div class="md-form my-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            </div>
-          </form>
-        </div>
-        <!-- Collapsible content -->
+              <div class="card">
 
-      </nav>
-      <!--/.Navbar-->
-
-      <!--Section: Products v.3-->
-      <section class="text-center mb-4">
-    <center>
-      <h1>Filtros</h1>
-      <form method="post">
-       {% csrf_token%}
-      <!-- modelo -->
-      <input type="radio" value="Z" name="category"/> Zapatos |
-      <input type="radio" value="NZ" name="category"/> Zapatos Niños |
-      <input type="radio" value="B" name="category"/> Botas |
-      <br>
-      <!-- color -->
-      <input type="radio" value="negro" name="color"/> negro |
-      <input type="radio" value="blanco" name="color"/> blanco|
-      <br>
-      <!-- precio -->
-      <label>MIn</label>
-      <input type="input" name="price_min">
-      <label>MAX</label>
-      <input type="input" name="price_max">
-
-      <!-- boton de busqueda -->
-      <input type="submit" value="search"/>
-      <div class="row wow fadeIn">
-
-        {% for item in data %}
-        <div class="col-lg-3 col-md-6 mb-4">
-
-          <div class="card">
-
-            <div class="view overlay">
-              <img src="{{ item.image.url }}" class="card-img-top">
-              <a href="{{ item.get_absolute_url }}">
-                <div class="mask rgba-white-slight"></div>
-              </a>
-            </div>
-
-            <div class="card-body text-center">
-              <a href="" class="grey-text">
-                <h5>{{ item.get_category_display }}</h5>
-              </a>
-              <h5>
-                <strong>
-                  <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}
-                    <span class="badge badge-pill {{ item.get_label_display }}-color">NEW</span>
+                <div class="view overlay">
+                  <img src="{{ item.image.url }}" class="card-img-top">
+                  <a href="{{ item.get_absolute_url }}">
+                    <div class="mask rgba-white-slight"></div>
                   </a>
-                </strong>
-              </h5>
+                </div>
 
-              <h4 class="font-weight-bold blue-text">
-                <strong>$
-                {% if item.discount_price %}
-                {{ item.discount_price }}
-                {% else %}
-                {{ item.price }}
-                {% endif %}
-                </strong>
-              </h4>
+                <div class="card-body text-center">
+                  <a href="" class="grey-text">
+                    <h5>{{ item.get_category_display }}</h5>
+                  </a>
+                  <h5>
+                    <strong>
+                      <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}
+                        <span class="badge badge-pill {{ item.get_label_display }}-color">NEW</span>
+                      </a>
+                    </strong>
+                  </h5>
+
+                  <h4 class="font-weight-bold blue-text">
+                    <strong>$
+                      {% if item.discount_price %}
+                      {{ item.discount_price }}
+                      {% else %}
+                      {{ item.price }}
+                      {% endif %}
+                    </strong>
+                  </h4>
+
+                </div>
+
+              </div>
 
             </div>
-
+            {% endfor %}
           </div>
-
-        </div>
-        {% endfor %}
-      </div>
-      </form>
-    </center>
+        </form>
+      </center>
 
 
-      </section>
-      <!--Section: Products v.3-->
+    </section>
+    <!--Section: Products v.3-->
 
-      <!--Pagination-->
+    <!--Pagination-->
 
-      {% if is_paginated %}
-      <nav class="d-flex justify-content-center wow fadeIn">
-        <ul class="pagination pg-blue">
+    {% if is_paginated %}
+    <nav class="d-flex justify-content-center wow fadeIn">
+      <ul class="pagination pg-blue">
 
-          {% if page_obj.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
-            </a>
-          </li>
-          {% endif %}
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        {% endif %}
 
-          <li class="page-item active">
-            <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
+        <li class="page-item active">
+          <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
 
-          {% if page_obj.has_next %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-          {% endif %}
-        </ul>
-      </nav>
-      {% endif %}
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
 
-    </div>
-  </main>
+  </div>
+</main>
 
 {% endblock content %}

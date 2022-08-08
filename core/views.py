@@ -346,82 +346,65 @@ class PaymentView(View):
 
 
 def filtros(request):
-    if request.method=="POST":
+    if request.method == "POST":
         print("aplicacndo filtros")
-        categories=request.POST.get("category")
-        colors=request.POST.get("color")
-        priceMin= request.POST.get("price_min")
-        priceMax= request.POST.get("price_max")
+        categories = request.POST.get("category")
+        colors = request.POST.get("color")
+        priceMin = request.POST.get("price_min")
+        priceMax = request.POST.get("price_max")
         print(categories)
         print(colors)
         print(priceMin)
         print(priceMax)
 
-        if (colors == None and str(priceMax)=="" and str(priceMin)==""):
+        if (colors == None and str(priceMax) == "" and str(priceMin) == ""):
             print("solor categoria")
-            searchst=Item.objects.filter(category=categories)
-            return render(request, 'filtros.html', {'data':searchst})
+            searchst = Item.objects.filter(category=categories)
+            return render(request, 'filtros.html', {'data': searchst})
 
-        elif (categories==None and colors==None):
+        elif (categories == None and colors == None):
             print("solo precio")
-            searchst=Item.objects.filter(price__gte = float(priceMin), price__lte= float(priceMax))
-            return render(request, 'filtros.html', {'data':searchst})
+            searchst = Item.objects.filter(price__gte=float(
+                priceMin), price__lte=float(priceMax))
+            return render(request, 'filtros.html', {'data': searchst})
 
-        elif (categories==None and str(priceMax)=="" and str(priceMin)==""):
+        elif (categories == None and str(priceMax) == "" and str(priceMin) == ""):
             print("solo color")
-            searchst=Item.objects.filter(price__gte = float(priceMin), price__lte= float(priceMax))
-            return render(request, 'filtros.html', {'data':searchst})
+            searchst = Item.objects.filter(price__gte=float(
+                priceMin), price__lte=float(priceMax))
+            return render(request, 'filtros.html', {'data': searchst})
 
-        elif (priceMax=="" and priceMin==""):
+        elif (priceMax == "" and priceMin == ""):
             print("categoria y color")
-            searchst=Item.objects.filter(category=categories).filter(color=colors)
-            return render(request, 'filtros.html', {'data':searchst})
+            searchst = Item.objects.filter(
+                category=categories).filter(color=colors)
+            return render(request, 'filtros.html', {'data': searchst})
 
-        elif colors==None:
+        elif colors == None:
             print("categoria y precio")
-            searchst=Item.objects.filter(category=categories).filter(price__gte = float(priceMin), price__lte= float(priceMax))
-            return render(request, 'filtros.html', {'data':searchst})
+            searchst = Item.objects.filter(category=categories).filter(
+                price__gte=float(priceMin), price__lte=float(priceMax))
+            return render(request, 'filtros.html', {'data': searchst})
 
-        elif categories==None:
+        elif categories == None:
             print("color y precio")
-            searchst=Item.objects.filter(color=colors).filter(price__gte = float(priceMin), price__lte= float(priceMax))
-            return render(request, 'filtros.html', {'data':searchst})
+            searchst = Item.objects.filter(color=colors).filter(
+                price__gte=float(priceMin), price__lte=float(priceMax))
+            return render(request, 'filtros.html', {'data': searchst})
 
         else:
-            searchst=Item.objects.filter(category=categories).filter(color=colors).filter(price__gte = float(priceMin), price__lte= float(priceMax))
-            return render(request, 'filtros.html', {'data':searchst})
+            searchst = Item.objects.filter(category=categories).filter(
+                color=colors).filter(price__gte=float(priceMin), price__lte=float(priceMax))
+            return render(request, 'filtros.html', {'data': searchst})
     else:
-        itemdisplays=Item.objects.all()
-        return render(request, 'filtros.html', {'data':itemdisplays})
+        itemdisplays = Item.objects.all()
+        return render(request, 'filtros.html', {'data': itemdisplays})
+
 
 class HomeView(ListView):
     model = Item
     paginate_by = 10
     template_name = "home.html"
-
-
-class HomeShoesView(ListView):
-    model = Item
-    queryset = Item.objects.filter(category='Z')
-    paginate_by = 10
-    print(model)
-    template_name = "home_shoes.html"
-
-
-class HomeBootsView(ListView):
-    model = Item
-    queryset = Item.objects.filter(category='B')
-    paginate_by = 10
-    print(model)
-    template_name = "home_boots.html"
-
-
-class HomeChildShoesView(ListView):
-    model = Item
-    queryset = Item.objects.filter(category='NZ')
-    paginate_by = 10
-    print(model)
-    template_name = "home_child_shoes.html"
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
