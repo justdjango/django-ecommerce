@@ -213,7 +213,7 @@ class PaymentView(View):
             context = {
                 'order': order,
                 'DISPLAY_COUPON_FORM': False,
-                'STRIPE_PUBLIC_KEY' : settings.STRIPE_PUBLIC_KEY
+                'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
             }
             userprofile = self.request.user.userprofile
             if userprofile.one_click_purchasing:
@@ -290,6 +290,9 @@ class PaymentView(View):
                 order_items = order.items.all()
                 order_items.update(ordered=True)
                 for item in order_items:
+                    '''product = item.item
+                    product.stock = product.stock - item.quantity
+                    product.save()'''
                     item.save()
 
                 order.ordered = True
@@ -383,9 +386,14 @@ def add_to_cart(request, slug):
         # check if the order item is in the order
         if order.items.filter(item__slug=item.slug).exists():
             order_item.quantity += 1
-            order_item.save()
-            messages.info(request, "This item quantity was updated.")
-            return redirect("core:order-summary")
+            if order_item.quantity > item.stock:
+                popUp = "Not enough stock for item: " + item.title
+                messages.error(request, popUp)
+                return redirect("core:order-summary")
+            else:
+                order_item.save()
+                messages.info(request, "This item quantity was updated.")
+                return redirect("core:order-summary")
         else:
             order.items.add(order_item)
             messages.info(request, "This item was added to your cart.")
