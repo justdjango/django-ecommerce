@@ -121,6 +121,17 @@
                 {% endfor %}
               </div>
 
+              <h3>Delivery option</h3>
+
+              <div class="d-block my-3">
+                {% for value, name in form.fields.delivery_option.choices %}
+                <div class="custom-control custom-radio">
+                  <input id="{{ name }}" name="delivery_option" value="{{ value }}" type="radio" class="custom-control-input" required>
+                  <label class="custom-control-label" for="{{ name }}">{{ name }}</label>
+                </div>
+                {% endfor %}
+              </div>
+
               <hr class="mb-4">
               <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
 

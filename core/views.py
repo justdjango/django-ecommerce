@@ -1,6 +1,5 @@
 import random
 import string
-
 import stripe
 from django.conf import settings
 from django.contrib import messages
@@ -16,7 +15,6 @@ from .forms import CheckoutForm, CouponForm, RefundForm, PaymentForm
 from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, UserProfile
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
-
 
 def create_ref_code():
     return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
@@ -191,6 +189,11 @@ class CheckoutView(View):
                         messages.info(
                             self.request, "Please fill in the required billing address fields")
 
+                delivery_option = form.cleaned_data.get(
+                        'delivery_option')
+                order.delivery_option = delivery_option
+                order.save()
+
                 payment_option = form.cleaned_data.get('payment_option')
 
                 if payment_option == 'S':
@@ -213,7 +216,7 @@ class PaymentView(View):
             context = {
                 'order': order,
                 'DISPLAY_COUPON_FORM': False,
-                'STRIPE_PUBLIC_KEY' : settings.STRIPE_PUBLIC_KEY
+                'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
             }
             userprofile = self.request.user.userprofile
             if userprofile.one_click_purchasing:
