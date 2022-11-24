@@ -16,6 +16,7 @@ from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, Us
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+
 def create_ref_code():
     return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
 
@@ -190,9 +191,11 @@ class CheckoutView(View):
                             self.request, "Please fill in the required billing address fields")
 
                 delivery_option = form.cleaned_data.get(
-                        'delivery_option')
+                    'delivery_option')
                 order.delivery_option = delivery_option
                 order.save()
+                order.get_total()
+                print(order.delivery_option)
 
                 payment_option = form.cleaned_data.get('payment_option')
 
