@@ -113,6 +113,9 @@ class Order(models.Model):
     received = models.BooleanField(default=False)
     refund_requested = models.BooleanField(default=False)
     refund_granted = models.BooleanField(default=False)
+    delivery_option = models.CharField(max_length=20, null=True)
+    email = models.CharField(max_length=50, null=True)
+    deleteTag = models.BooleanField(default=False)
 
     '''
     1. Item added to cart
