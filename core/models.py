@@ -42,6 +42,7 @@ class Item(models.Model):
     label = models.CharField(choices=LABEL_CHOICES, max_length=1)
     slug = models.SlugField()
     description = models.TextField()
+    stock = models.PositiveIntegerField()
     image = models.ImageField()
 
     def __str__(self):
@@ -86,6 +87,10 @@ class OrderItem(models.Model):
         if self.item.discount_price:
             return self.get_total_discount_item_price()
         return self.get_total_item_price()
+
+    def validate_stock(self):
+        if self.quantity > self.item.stock:
+            raise("Not enough stock for this item: ", self.item.title)
 
 
 class Order(models.Model):
