@@ -16,6 +16,7 @@ from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, Us
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+
 def create_ref_code():
     return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
 
@@ -25,6 +26,15 @@ def products(request):
         'items': Item.objects.all()
     }
     return render(request, "products.html", context)
+
+# Search Function
+
+
+def search(request):
+    query = request.GET['query']
+    data = Item.objects.filter(
+        title__icontains=query, description__icontains=query).order_by('-id')
+    return render(request, "search.html", {'data': data})
 
 
 def is_valid_form(values):
@@ -190,7 +200,7 @@ class CheckoutView(View):
                             self.request, "Please fill in the required billing address fields")
 
                 delivery_option = form.cleaned_data.get(
-                        'delivery_option')
+                    'delivery_option')
                 order.delivery_option = delivery_option
                 order.save()
 
