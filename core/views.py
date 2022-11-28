@@ -16,6 +16,7 @@ from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, Us
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+
 def create_ref_code():
     return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
 
@@ -190,9 +191,11 @@ class CheckoutView(View):
                             self.request, "Please fill in the required billing address fields")
 
                 delivery_option = form.cleaned_data.get(
-                        'delivery_option')
+                    'delivery_option')
                 order.delivery_option = delivery_option
                 order.save()
+                order.get_total()
+                print(order.delivery_option)
 
                 payment_option = form.cleaned_data.get('payment_option')
 
@@ -293,6 +296,9 @@ class PaymentView(View):
                 order_items = order.items.all()
                 order_items.update(ordered=True)
                 for item in order_items:
+                    '''product = item.item
+                    product.stock = product.stock - item.quantity
+                    product.save()'''
                     item.save()
 
                 order.ordered = True
@@ -386,9 +392,14 @@ def add_to_cart(request, slug):
         # check if the order item is in the order
         if order.items.filter(item__slug=item.slug).exists():
             order_item.quantity += 1
-            order_item.save()
-            messages.info(request, "This item quantity was updated.")
-            return redirect("core:order-summary")
+            if order_item.quantity > item.stock:
+                popUp = "Not enough stock for item: " + item.title
+                messages.error(request, popUp)
+                return redirect("core:order-summary")
+            else:
+                order_item.save()
+                messages.info(request, "This item quantity was updated.")
+                return redirect("core:order-summary")
         else:
             order.items.add(order_item)
             messages.info(request, "This item was added to your cart.")
