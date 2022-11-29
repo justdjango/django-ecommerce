@@ -7,6 +7,33 @@
     background-color: #0071bc;
 }
 
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 80px 20px 80px;
+}
+
+.strong-title {
+  font-weight: 400;
+  font-family: Roboto,sans-serif;
+  font-size: 1rem;
+  display: flex;
+}
+
+.footer-segment {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  /* margin: 0px 20px; */
+  /* background-color: red; */
+}
+
+.p {
+  text-align: left;
+  margin-top: 5px;
+  width: 85%;
+}
+
 </style>
 </head>
 </html>
@@ -14,12 +41,40 @@
 <footer class="page-footer text-center font-small mt-4 wow fadeIn">
 
     <hr class="my-4">
-
+    <div class="footer-container" id="footer_container">
+      <div class="footer-segment">
+        <strong class="strong-title">¿Quienes somos?</strong>
+        <p class="p">
+          Somos una empresa Española de elaboración de equipamento de acampada que tiene como
+          objetivo poder brindarte todas las herramientas disponibles para que puedas disfrutar
+          de este bello deporte sin ninguna preocupación sabiendo que nuestros productos te respaldan hasta 
+          en las situaciones más difíciles.
+        </p>
+      </div>
+      <div class="footer-segment">
+        <strong class="strong-title">Misión</strong>
+        <p class="p">
+          Proveerle a nuestros clientes los equipos de más alta calidad, de alta duración y con la 
+          última tecnología disponible en el mercado. Nuestra misión es seguir innovando en favor
+          de nuestros clientes para poder brindarles equipo que se adecue a sus necesidades.
+        </p>
+      </div>
+      <!-- <strong class="strong-title">Conocenos</strong> -->
+      <div class="footer-segment">
+        <strong class="strong-title">Contáctanos</strong>
+        <p class="p">
+          Calle Bartolomé de Medina, 10
+        </p>
+        <p class="p" style="margin-top: 2px;">
+          +34 665 790 193
+        </p>
+      </div>
+    </div>
     
     <!--Copyright-->
     <div class="footer-copyright py-3">
-      © 2019 Copyright:
-      <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> MDBootstrap.com </a>
+      Contact e-mail: 
+      <a href="mailto:acme-campers-help@acme-campers.com">acme-campers-help@acme-campers.com</a>
     </div>
     <!--/.Copyright-->
 
