@@ -30,11 +30,14 @@ def products(request):
 # Search Function
 
 
-def search(request):
-    query = request.GET['query']
-    data = Item.objects.filter(
-        title__icontains=query, description__icontains=query).order_by('-id')
-    return render(request, "search.html", {'data': data})
+class SearchResult(ListView):
+    model = Item
+    template_name = 'search.html'
+
+    def search(request):
+        query = request.GET.get['q']
+        context = {Item.objects.filter(title__icontains=query)}
+        return render(request, 'search.html', context)
 
 
 def is_valid_form(values):
