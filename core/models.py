@@ -42,7 +42,7 @@ class Item(models.Model):
     label = models.CharField(choices=LABEL_CHOICES, max_length=1)
     slug = models.SlugField()
     description = models.TextField()
-    stock = models.PositiveIntegerField()
+    stock = models.PositiveIntegerField(default=0)
     image = models.ImageField()
 
     def __str__(self):
