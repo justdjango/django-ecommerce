@@ -7,9 +7,9 @@ from django_countries.fields import CountryField
 
 
 CATEGORY_CHOICES = (
-    ('S', 'Shirt'),
-    ('SW', 'Sport wear'),
-    ('OW', 'Outwear')
+    ('A', 'Class A'),
+    ('B', 'Class B'),
+    ('C', 'Class C')
 )
 
 LABEL_CHOICES = (
@@ -37,12 +37,13 @@ class UserProfile(models.Model):
 class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
+    description = models.CharField(max_length=1000)
     discount_price = models.FloatField(blank=True, null=True)
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
     label = models.CharField(choices=LABEL_CHOICES, max_length=1)
     slug = models.SlugField()
     description = models.TextField()
-    stock = models.PositiveIntegerField()
+    stock = models.PositiveIntegerField(default=0)
     image = models.ImageField()
 
     def __str__(self):
@@ -116,6 +117,7 @@ class Order(models.Model):
     delivery_option = models.CharField(max_length=20, null=True)
     email = models.CharField(max_length=50, null=True)
     deleteTag = models.BooleanField(default=False)
+    totalOrder = models.FloatField(null=True)
 
     '''
     1. Item added to cart
@@ -135,9 +137,21 @@ class Order(models.Model):
         total = 0
         for order_item in self.items.all():
             total += order_item.get_final_price()
-        if self.coupon:
-            total -= self.coupon.amount
+        if total < 50.0:
+            if self.delivery_option == 'ST':
+                total += 3
+            if self.delivery_option == 'EX':
+                total += 6
+
+        self.totalOrder = total
+        self.save()
         return total
+
+    def standard_delivery(self):
+        self.totalOrder = self.get_total() + 3
+
+    def express_delivery(self):
+        self.totalOrder = self.get_total() + 6
 
 
 class Address(models.Model):

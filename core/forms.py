@@ -9,8 +9,8 @@ PAYMENT_CHOICES = (
 )
 
 DELIVERY_CHOICES = (
-    ('ST', 'Standard'),
-    ('EX', 'Express')
+    ('ST', 'Standard (+ 3.00$)'),
+    ('EX', 'Express (+ 6.00$)')
 )
 
 
