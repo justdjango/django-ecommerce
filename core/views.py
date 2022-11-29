@@ -10,6 +10,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, View
+from django.db.models import Q  # New
 
 from .forms import CheckoutForm, CouponForm, RefundForm, PaymentForm
 from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, UserProfile
@@ -26,6 +27,18 @@ def products(request):
         'items': Item.objects.all()
     }
     return render(request, "products.html", context)
+
+# Search Function
+
+
+class SearchResult(ListView):
+    model = Item
+    template_name = 'search.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get("query")
+        # new
+        return Item.objects.filter(Q(title__icontains=query) | Q(description__icontains=query) | Q(category__icontains=query))
 
 
 def is_valid_form(values):
