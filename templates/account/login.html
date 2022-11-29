@@ -1,3 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+/* Sign In block */
+.row.wow.fadeIn.animated {
+  margin-top: 60px!important;
+}
+
+/* Buttons */
+
+.btn.forgot-password {
+  background: #b3b3b3!important;
+  color: #fff!important;
+  margin-left: 0!important;
+  margin-right: 0.375rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-radius: 0.375rem;
+}
+
+.btn.sign-in {
+  background: #0071bc!important;
+  color: #fff!important;
+  margin-right: 0.375rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-radius: 0.375rem;
+}
+
+</style>
+</head>
+</html>
+
 {% extends "account/base.html" %}
 {% load i18n %}
 {% load account socialaccount %}
@@ -43,8 +78,8 @@
             {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
             {% endif %}
-            <a class="btn btn-default" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-            <button class="btn btn-primary" type="submit">{% trans "Sign In" %}</button>
+            <a class="btn forgot-password" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+            <button class="btn sign-in" type="submit">{% trans "Sign In" %}</button>
           </form>
           </div>
         </div>
