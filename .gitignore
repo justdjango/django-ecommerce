@@ -24,6 +24,8 @@ share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+.env
+db.sqlite3
 MANIFEST
 
 # PyInstaller
