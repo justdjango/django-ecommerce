@@ -1,6 +1,5 @@
 import random
 import string
-
 import stripe
 from django.conf import settings
 from django.contrib import messages
@@ -11,6 +10,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, View
+from django.db.models import Q  # New
 
 from .forms import CheckoutForm, CouponForm, RefundForm, PaymentForm
 from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, UserProfile
@@ -27,6 +27,18 @@ def products(request):
         'items': Item.objects.all()
     }
     return render(request, "products.html", context)
+
+# Search Function
+
+
+class SearchResult(ListView):
+    model = Item
+    template_name = 'search.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get("query")
+        # new
+        return Item.objects.filter(Q(title__icontains=query) | Q(description__icontains=query) | Q(category__icontains=query))
 
 
 def is_valid_form(values):
@@ -191,6 +203,13 @@ class CheckoutView(View):
                         messages.info(
                             self.request, "Please fill in the required billing address fields")
 
+                delivery_option = form.cleaned_data.get(
+                    'delivery_option')
+                order.delivery_option = delivery_option
+                order.save()
+                order.get_total()
+                print(order.delivery_option)
+
                 payment_option = form.cleaned_data.get('payment_option')
 
                 if payment_option == 'S':
@@ -213,7 +232,7 @@ class PaymentView(View):
             context = {
                 'order': order,
                 'DISPLAY_COUPON_FORM': False,
-                'STRIPE_PUBLIC_KEY' : settings.STRIPE_PUBLIC_KEY
+                'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
             }
             userprofile = self.request.user.userprofile
             if userprofile.one_click_purchasing:
@@ -290,6 +309,9 @@ class PaymentView(View):
                 order_items = order.items.all()
                 order_items.update(ordered=True)
                 for item in order_items:
+                    '''product = item.item
+                    product.stock = product.stock - item.quantity
+                    product.save()'''
                     item.save()
 
                 order.ordered = True
@@ -383,9 +405,14 @@ def add_to_cart(request, slug):
         # check if the order item is in the order
         if order.items.filter(item__slug=item.slug).exists():
             order_item.quantity += 1
-            order_item.save()
-            messages.info(request, "This item quantity was updated.")
-            return redirect("core:order-summary")
+            if order_item.quantity > item.stock:
+                popUp = "Not enough stock for item: " + item.title
+                messages.error(request, popUp)
+                return redirect("core:order-summary")
+            else:
+                order_item.save()
+                messages.info(request, "This item quantity was updated.")
+                return redirect("core:order-summary")
         else:
             order.items.add(order_item)
             messages.info(request, "This item was added to your cart.")

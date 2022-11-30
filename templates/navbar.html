@@ -1,11 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+ 
+ /* Navbar */
+.mdb-color.lighten-3 {
+  background-color: #0071bc!important;
+  border-radius: 6px;
+  margin-top: 6em!important;
+}
+
+/* Active Categorie */
+.navbar.navbar-dark .breadcrumb .nav-item.active>.nav-link, .navbar.navbar-dark .navbar-nav .nav-item.active>.nav-link {
+    background-color: #095c97;
+    border-radius: 0.375rem;
+}
+
+.navbar.navbar-dark .navbar-nav .nav-item .nav-link {
+  border-radius: 0.375em;
+}
+
+.mdb-color.lighten-3 {
+  background-color: #0071bc!important;
+  margin-top: 4em!important;
+  border-radius: 0.375em;
+}
+
+.nav-item.active {
+  background-color: #095c97!important;
+  color: #095c97!important;
+  border-radius: 0.25em;
+}
+
+/* Buttons */
+
+.btn-default.nav-link.waves-effect {
+  background: #0071bc!important;
+  color: #fff!important;
+  margin-left: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-radius: 0.375rem;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+
+.btn-default.nav-link.waves-effect.login {
+  background: #b3b3b3!important;
+  color: #fff!important;
+  margin-left: 0.375rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-radius: 0.375rem;
+}
+
+
+</style>
+</head>
+</html>
+
 {% load cart_template_tags %}
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand waves-effect" href="/">
-        <strong class="blue-text">DJe-commerce</strong>
+      <a class="navbar-brand" href="/">
+        <img src="https://lh5.googleusercontent.com/CIV0Fatj9C1pS0hPmvOIhAPwcXUYAYf5xwKacJpzUd5sWM1kIcKmrYN3lg51WVW0OCA=w2400" width="75" height="75">
+        <strong class="blue-text"></strong>
       </a>
 
       <!-- Collapse -->
@@ -41,18 +102,18 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
+            <a class="btn-default nav-link waves-effect" href="{% url 'account_logout' %}">
               <span class="clearfix d-none d-sm-inline-block"> Logout </span>
             </a>
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="{% url 'account_login' %}">
+            <a class="btn-default nav-link waves-effect login" href="{% url 'account_login' %}">
               <span class="clearfix d-none d-sm-inline-block"> Login </span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
+            <a class="btn-default nav-link waves-effect" href="{% url 'account_signup' %}">
               <span class="clearfix d-none d-sm-inline-block"> Signup </span>
             </a>
           </li>
