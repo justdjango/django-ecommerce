@@ -41,6 +41,12 @@ class SearchResult(ListView):
         return Item.objects.filter(Q(title__icontains=query) | Q(description__icontains=query) | Q(category__icontains=query))
 
 
+class CategoryAll(ListView):
+    model = Item
+    paginate_by = 10
+    template_name = "home.html"
+
+
 class CategoryFU(ListView):
     model = Item
     template_name = 'home.html'
