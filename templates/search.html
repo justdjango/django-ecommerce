@@ -1,15 +1,6 @@
 {% extends "base.html" %}
 
-<script>
-  $(document).ready(function () {
-    console.log('aqui entra');
-    $('.nav-item[cattegory = "FU"]').addClass("active");
-
-  });
-</script>
-
 {% block content %}
-
 <main>
   <div class="container">
 
@@ -29,9 +20,8 @@
       <div class="collapse navbar-collapse" id="basicExampleNav">
 
         <!-- Links -->
-
         <ul class="navbar-nav mr-auto">
-          <form class="form-inline" action="/all" method="get">
+          <form class="form-inline" action="/" method="get">
             <li class="nav-item">
               <button class="btn-default nav-link waves-effect" type="submit">All
               </button>
@@ -74,8 +64,6 @@
           </form>
 
         </ul>
-
-
         <!-- Links -->
 
         <form class="form-inline" action="/search" method="get">
@@ -89,7 +77,9 @@
     </nav>
     <!--/.Navbar-->
 
-    <!--Section: Products v.3-->
+    <h3>Search results</h3>
+
+    <!--Section: Products v.-->
     <section class="text-center mb-4">
 
       <div class="row wow fadeIn">
@@ -97,7 +87,7 @@
         {% for item in object_list %}
         <div class="col-lg-3 col-md-6 mb-4">
 
-          <div class="card" cattegory="{{item.cattegory}}">
+          <div class="card">
 
             <div class="view overlay">
               {% comment %} <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg"

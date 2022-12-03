@@ -8,6 +8,11 @@ PAYMENT_CHOICES = (
     ('P', 'PayPal')
 )
 
+DELIVERY_CHOICES = (
+    ('ST', 'Standard (+ 3.00$)'),
+    ('EX', 'Express (+ 6.00$)')
+)
+
 
 class CheckoutForm(forms.Form):
     shipping_address = forms.CharField(required=False)
@@ -36,6 +41,9 @@ class CheckoutForm(forms.Form):
 
     payment_option = forms.ChoiceField(
         widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
+
+    delivery_option = forms.ChoiceField(
+        widget=forms.RadioSelect, choices=DELIVERY_CHOICES)
 
 
 class CouponForm(forms.Form):
