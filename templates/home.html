@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 
+<script>
+  $(document).ready(function () {
+    console.log('aqui entra');
+    $('.nav-item[cattegory = "FU"]').addClass("active");
+
+  });
+</script>
+
 {% block content %}
 
 <main>
@@ -21,29 +29,53 @@
       <div class="collapse navbar-collapse" id="basicExampleNav">
 
         <!-- Links -->
+
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">All
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Furniture</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Vehicles</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Clothes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Outdoor</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Backpacks</a>
-          </li>
+          <form class="form-inline" action="" method="get">
+            <li class="nav-item">
+              <button class="btn-default nav-link waves-effect" type="submit">All
+              </button>
+            </li>
+          </form>
+
+          <form class="form-inline" action="/FU" method="get">
+            <li class="nav-item">
+              <button class="btn-default nav-link waves-effect" type="submit">Furniture
+              </button>
+            </li>
+          </form>
+
+          <form class="form-inline" action="/VE" method="get">
+            <li class="nav-item">
+              <button class="btn-default nav-link waves-effect" type="submit">Vehicles
+              </button>
+            </li>
+          </form>
+
+          <form class="form-inline" action="/CL" method="get">
+            <li class="nav-item">
+              <button class="btn-default nav-link waves-effect" type="submit">Clothes
+              </button>
+            </li>
+          </form>
+
+          <form class="form-inline" action="/OD" method="get">
+            <li class="nav-item">
+              <button class="btn-default nav-link waves-effect" type="submit">Outdoor
+              </button>
+            </li>
+          </form>
+
+          <form class="form-inline" action="/BP" method="get">
+            <li class="nav-item">
+              <button class="btn-default nav-link waves-effect" type="submit">Backpacks
+              </button>
+            </li>
+          </form>
 
         </ul>
+
+
         <!-- Links -->
 
         <form class="form-inline" action="/search" method="get">
@@ -65,7 +97,7 @@
         {% for item in object_list %}
         <div class="col-lg-3 col-md-6 mb-4">
 
-          <div class="card">
+          <div class="card" cattegory="{{item.cattegory}}">
 
             <div class="view overlay">
               {% comment %} <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg"

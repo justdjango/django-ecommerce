@@ -1,144 +1,175 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <main>
-    <div class="container">
+<main>
+  <div class="container">
 
-      <!--Navbar-->
-      <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
 
-        <!-- Navbar brand -->
-        <span class="navbar-brand">Categories:</span>
+      <!-- Navbar brand -->
+      <span class="navbar-brand">Categories:</span>
 
-        <!-- Collapse button -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <!-- Collapse button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+        aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <!-- Collapsible content -->
-        <div class="collapse navbar-collapse" id="basicExampleNav">
+      <!-- Collapsible content -->
+      <div class="collapse navbar-collapse" id="basicExampleNav">
 
-          <!-- Links -->
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">All
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+          <form class="form-inline" action="/" method="get">
             <li class="nav-item">
-              <a class="nav-link" href="#">Class A</a>
+              <button class="btn-default nav-link waves-effect" type="submit">All
+              </button>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Class B</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Class C</a>
-            </li>
-
-          </ul>
-          <!-- Links -->
-
-          <form class="form-inline" action="/search" method="get">
-            <div class="md-form my-0">
-              <input name="query" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            </div>
           </form>
-        </div>
-        <!-- Collapsible content -->
 
-      </nav>
-      <!--/.Navbar-->
+          <form class="form-inline" action="/FU" method="get">
+            <li class="nav-item">
+              <button class="btn-default nav-link waves-effect" type="submit">Furniture
+              </button>
+            </li>
+          </form>
 
-      <h3>Search results</h3>
+          <form class="form-inline" action="/VE" method="get">
+            <li class="nav-item">
+              <button class="btn-default nav-link waves-effect" type="submit">Vehicles
+              </button>
+            </li>
+          </form>
 
-      <!--Section: Products v.-->
-      <section class="text-center mb-4">
+          <form class="form-inline" action="/CL" method="get">
+            <li class="nav-item">
+              <button class="btn-default nav-link waves-effect" type="submit">Clothes
+              </button>
+            </li>
+          </form>
 
-        <div class="row wow fadeIn">
+          <form class="form-inline" action="/OD" method="get">
+            <li class="nav-item">
+              <button class="btn-default nav-link waves-effect" type="submit">Outdoor
+              </button>
+            </li>
+          </form>
 
-          {% for item in object_list %}
-          <div class="col-lg-3 col-md-6 mb-4">
+          <form class="form-inline" action="/BP" method="get">
+            <li class="nav-item">
+              <button class="btn-default nav-link waves-effect" type="submit">Backpacks
+              </button>
+            </li>
+          </form>
 
-            <div class="card">
+        </ul>
+        <!-- Links -->
 
-              <div class="view overlay">
-                {% comment %} <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg" class="card-img-top" {% endcomment %}
-                <img src="{{ item.image.url }}" class="card-img-top">
-                <a href="{{ item.get_absolute_url }}">
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
+        <form class="form-inline" action="/search" method="get">
+          <div class="md-form my-0">
+            <input name="query" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          </div>
+        </form>
+      </div>
+      <!-- Collapsible content -->
 
-              <div class="card-body text-center">
-                <a href="" class="grey-text">
-                  <h5>{{ item.get_category_display }}</h5>
-                </a>
-                <h5>
-                  <strong>
-                    <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}
-                      <span class="badge badge-pill {{ item.get_label_display }}-color">NEW</span>
-                    </a>
-                  </strong>
-                </h5>
+    </nav>
+    <!--/.Navbar-->
 
-                <h4 class="font-weight-bold blue-text">
-                  <strong>$
+    <h3>Search results</h3>
+
+    <!--Section: Products v.-->
+    <section class="text-center mb-4">
+
+      <div class="row wow fadeIn">
+
+        {% for item in object_list %}
+        <div class="col-lg-3 col-md-6 mb-4">
+
+          <div class="card">
+
+            <div class="view overlay">
+              {% comment %} <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg"
+                class="card-img-top" {% endcomment %} <img src="{{ item.image }}" class="card-img-top">
+              <a href="{{ item.get_absolute_url }}">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+
+            <div class="card-body text-center">
+              <a href="" class="grey-text">
+                <h5>{{ item.get_category_display }}</h5>
+              </a>
+              <h5>
+                <strong>
+                  <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}
+                    <span class="badge badge-pill {{ item.get_label_display }}-color">NEW</span>
+                  </a>
+                </strong>
+              </h5>
+
+              <h4 class="font-weight-bold blue-text">
+                <strong>$
                   {% if item.discount_price %}
                   {{ item.discount_price }}
                   {% else %}
                   {{ item.price }}
                   {% endif %}
-                  </strong>
-                </h4>
-
-              </div>
-
+                </strong>
+              </h4>
+              {% if item.stock == 0 %}
+              <h7 class="font-weight-bold red-text">
+                <strong>
+                  SOLD OUT
+                </strong>
+              </h7>
+              {% endif %}
             </div>
 
           </div>
-          {% endfor %}
+
         </div>
+        {% endfor %}
+      </div>
 
-      </section>
-      <!--Section: Products v.3-->
+    </section>
+    <!--Section: Products v.3-->
 
-      <!--Pagination-->
+    <!--Pagination-->
 
-      {% if is_paginated %}
-      <nav class="d-flex justify-content-center wow fadeIn">
-        <ul class="pagination pg-blue">
+    {% if is_paginated %}
+    <nav class="d-flex justify-content-center wow fadeIn">
+      <ul class="pagination pg-blue">
 
-          {% if page_obj.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
-            </a>
-          </li>
-          {% endif %}
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        {% endif %}
 
-          <li class="page-item active">
-            <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
+        <li class="page-item active">
+          <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
 
-          {% if page_obj.has_next %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-          {% endif %}
-        </ul>
-      </nav>
-      {% endif %}
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
 
-    </div>
-  </main>
+  </div>
+</main>
 
 {% endblock content %}
-
-

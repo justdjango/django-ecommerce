@@ -9,8 +9,8 @@ from django_countries.fields import CountryField
 CATEGORY_CHOICES = (
     ('FU', 'Furniture'),
     ('VE', 'Vehicles'),
-    ('CLT', 'Clothes'),
-    ('OUT', 'Outdoor'),
+    ('CL', 'Clothes'),
+    ('OD', 'Outdoor'),
     ('BP', 'Backpacks')
 )
 

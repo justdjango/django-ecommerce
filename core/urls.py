@@ -1,6 +1,11 @@
 from django.urls import path
 from .views import (
     ItemDetailView,
+    CategoryFU,
+    CategoryVE,
+    CategoryOD,
+    CategoryBP,
+    CategoryCL,
     CheckoutView,
     HomeView,
     OrderSummaryView,
@@ -18,6 +23,11 @@ app_name = 'core'
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('search/', SearchResult.as_view(), name='search'),
+    path('FU/', CategoryFU.as_view(), name='FU'),
+    path('VE/', CategoryVE.as_view(), name='VE'),
+    path('OD/', CategoryOD.as_view(), name='OD'),
+    path('BP/', CategoryBP.as_view(), name='BP'),
+    path('CL/', CategoryCL.as_view(), name='CL'),
     path('checkout/', CheckoutView.as_view(), name='checkout'),
     path('order-summary/', OrderSummaryView.as_view(), name='order-summary'),
     path('product/<slug>/', ItemDetailView.as_view(), name='product'),
