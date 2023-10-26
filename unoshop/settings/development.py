@@ -1,4 +1,4 @@
-from .base import *
+from .settings import *
 import os
 
 DEBUG = True
