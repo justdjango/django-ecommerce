@@ -43,6 +43,7 @@ class Item(models.Model):
     slug = models.SlugField()
     description = models.TextField()
     image = models.ImageField()
+    stock = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -61,6 +62,14 @@ class Item(models.Model):
         return reverse("core:remove-from-cart", kwargs={
             'slug': self.slug
         })
+
+    def is_in_stock(self):
+        try:
+            return self.stock > 0
+        except Exception as e:
+            # Handle any exceptions that may occur during the check
+            print(f"An error occurred: {e}")
+            return False
 
 
 class OrderItem(models.Model):
