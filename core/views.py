@@ -303,7 +303,19 @@ class PaymentView(View):
                 order.payment = payment
                 order.ref_code = create_ref_code()
                 order.save()
-
+                # NEW CODE HERE
+                try:
+                    subject = "Order Confirmation"
+                    message = f"Dear {self.request.user.username},\n\nYour order with reference code {order.ref_code} has been successfully placed.\n\nOrder Details:\n"
+                    for item in order.items.all():
+                        message += f"- {item.item.title} x {item.quantity}\n"
+                    message += f"\nTotal: ${order.get_total()}\n\nThank you for your purchase."
+                    from_email = settings.EMAIL_HOST_USER
+                    to_email = self.request.user.email
+                    send_mail(subject, message, from_email, [to_email], fail_silently=False)
+                except Exception as e:
+                    messages.warning(self.request, "Failed to send order confirmation email.")
+                # END NEW CODE
                 messages.success(self.request, "Your order was successful!")
                 return redirect("/")
 
