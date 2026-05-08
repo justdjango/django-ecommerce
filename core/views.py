@@ -480,7 +480,11 @@ def remove_single_item_from_cart(request, slug):
 def get_coupon(request, code):
     try:
         coupon = Coupon.objects.get(code=code)
-        return coupon
+        if coupon.is_valid():
+            return coupon
+        else:
+            messages.info(request, "This coupon has expired")
+            return redirect("core:checkout")
     except ObjectDoesNotExist:
         messages.info(request, "This coupon does not exist")
         return redirect("core:checkout")

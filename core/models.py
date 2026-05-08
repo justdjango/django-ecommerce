@@ -172,9 +172,23 @@ class Payment(models.Model):
 class Coupon(models.Model):
     code = models.CharField(max_length=15)
     amount = models.FloatField()
+    valid_from = models.DateTimeField(null=True, blank=True)
+    valid_to = models.DateTimeField(null=True, blank=True)
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.code
+
+    def is_valid(self):
+        if not self.active:
+            return False
+        from datetime import datetime
+        now = datetime.now()
+        if self.valid_from and now < self.valid_from:
+            return False
+        if self.valid_to and now > self.valid_to:
+            return False
+        return True
 
 
 class Refund(models.Model):
