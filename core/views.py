@@ -508,6 +508,9 @@ class AddCouponView(View):
                 code = form.cleaned_data.get('code')
                 order = Order.objects.get(
                     user=self.request.user, ordered=False)
+                if order.coupon is not None:
+                    messages.info(self.request, "A coupon is already applied to this order")
+                    return redirect("core:checkout")
                 order.coupon = get_coupon(self.request, code)
                 order.save()
                 messages.success(self.request, "Successfully added coupon")
