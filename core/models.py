@@ -6,17 +6,16 @@ from django.shortcuts import reverse
 from django_countries.fields import CountryField
 
 
-CATEGORY_CHOICES = (
-    ('S', 'Shirt'),
-    ('SW', 'Sport wear'),
-    ('OW', 'Outwear')
-)
+class Category(models.TextChoices):
+    SHIRT = 'S', 'Shirt'
+    SPORT_WEAR = 'SW', 'Sport wear'
+    OUTWEAR = 'OW', 'Outwear'
 
-LABEL_CHOICES = (
-    ('P', 'primary'),
-    ('S', 'secondary'),
-    ('D', 'danger')
-)
+
+class Label(models.TextChoices):
+    PRIMARY = 'P', 'primary'
+    SECONDARY = 'S', 'secondary'
+    DANGER = 'D', 'danger'
 
 ADDRESS_CHOICES = (
     ('B', 'Billing'),
@@ -38,8 +37,8 @@ class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
     discount_price = models.FloatField(blank=True, null=True)
-    category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
-    label = models.CharField(choices=LABEL_CHOICES, max_length=1)
+    category = models.CharField(choices=Category.choices, max_length=2)
+    label = models.CharField(choices=Label.choices, max_length=1)
     slug = models.SlugField()
     description = models.TextField()
     image = models.ImageField()
