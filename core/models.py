@@ -6,17 +6,16 @@ from django.shortcuts import reverse
 from django_countries.fields import CountryField
 
 
-CATEGORY_CHOICES = (
-    ('S', 'Shirt'),
-    ('SW', 'Sport wear'),
-    ('OW', 'Outwear')
-)
+class Category(models.TextChoices):
+    SHIRT = 'S', 'Shirt'
+    SPORT_WEAR = 'SW', 'Sport wear'
+    OUTWEAR = 'OW', 'Outwear'
 
-LABEL_CHOICES = (
-    ('P', 'primary'),
-    ('S', 'secondary'),
-    ('D', 'danger')
-)
+
+class Label(models.TextChoices):
+    PRIMARY = 'P', 'primary'
+    SECONDARY = 'S', 'secondary'
+    DANGER = 'D', 'danger'
 
 ADDRESS_CHOICES = (
     ('B', 'Billing'),
@@ -38,11 +37,12 @@ class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
     discount_price = models.FloatField(blank=True, null=True)
-    category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
-    label = models.CharField(choices=LABEL_CHOICES, max_length=1)
+    category = models.CharField(choices=Category.choices, max_length=2)
+    label = models.CharField(choices=Label.choices, max_length=1)
     slug = models.SlugField()
     description = models.TextField()
     image = models.ImageField()
+    stock = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -61,6 +61,14 @@ class Item(models.Model):
         return reverse("core:remove-from-cart", kwargs={
             'slug': self.slug
         })
+
+    def is_in_stock(self):
+        try:
+            return self.stock > 0
+        except Exception as e:
+            # Handle any exceptions that may occur during the check
+            print(f"An error occurred: {e}")
+            return False
 
 
 class OrderItem(models.Model):
@@ -129,7 +137,7 @@ class Order(models.Model):
             total += order_item.get_final_price()
         if self.coupon:
             total -= self.coupon.amount
-        return total
+        return max(total, 0)
 
 
 class Address(models.Model):
@@ -163,9 +171,23 @@ class Payment(models.Model):
 class Coupon(models.Model):
     code = models.CharField(max_length=15)
     amount = models.FloatField()
+    valid_from = models.DateTimeField(null=True, blank=True)
+    valid_to = models.DateTimeField(null=True, blank=True)
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.code
+
+    def is_valid(self):
+        if not self.active:
+            return False
+        from datetime import datetime
+        now = datetime.now()
+        if self.valid_from and now < self.valid_from:
+            return False
+        if self.valid_to and now > self.valid_to:
+            return False
+        return True
 
 
 class Refund(models.Model):
