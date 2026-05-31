@@ -1,0 +1,16 @@
+Hi {{ user.get_full_name|default:user.username }},
+
+Thank you for your order!
+
+Reference: {{ order.ref_code }}
+
+Items:
+{% for item in order.orderitem_set.all %}  - {{ item.item.title }} × {{ item.quantity }}  ${{ item.get_final_price }}
+{% endfor %}
+
+Total charged: ${{ order.get_total }}
+
+We'll notify you when your order ships.
+
+Best regards,
+Your Store Team
