@@ -1,7 +1,4 @@
-import random
-import string
-
-import stripe
+import random, string, stripe
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -291,6 +288,7 @@ class PaymentView(View):
                 order_items.update(ordered=True)
                 for item in order_items:
                     item.save()
+                    return HttpResponse('Thanks')
 
                 order.ordered = True
                 order.payment = payment
