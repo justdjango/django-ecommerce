@@ -38,6 +38,7 @@ def is_valid_form(values):
 
 
 class CheckoutView(View):
+    '''  CheckoutView class'''
     def get(self, *args, **kwargs):
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)
