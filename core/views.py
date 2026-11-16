@@ -484,7 +484,7 @@ class AddCouponView(View):
                 return redirect("core:checkout")
 
 
-class RequestRefundView(View):
+class RequestRefundView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         form = RefundForm()
         context = {
@@ -500,7 +500,8 @@ class RequestRefundView(View):
             email = form.cleaned_data.get('email')
             # edit the order
             try:
-                order = Order.objects.get(ref_code=ref_code)
+                order = Order.objects.get(
+                    ref_code=ref_code, user=self.request.user)
                 order.refund_requested = True
                 order.save()
 
